@@ -1,23 +1,19 @@
-import logo from './logo.svg';
+
 import './App.css';
+import {useSelector, useDispatch} from 'react-redux';
+import {edit} from './actions';
+import EditBoard from './containers/EditBoard'
+import VisibleBoard from './containers/VisibleBoard'
 
 function App() {
+  const dispatch = useDispatch();
+  const board = useSelector(state => state.board);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <VisibleBoard />
+      <EditBoard />
+      <button onClick={() => dispatch(edit(1, 'k'))}>Button Wow</button>
     </div>
   );
 }

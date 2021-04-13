@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+.square {
+  float: left;
+  height: 45px;
+  width: 45px;
+  display: grid;
+background-color:rgb(185, 161, 110);
+}
+
+.board-row:nth-child(odd) .square:nth-child(2n + 1) {
+  background-color:rgb(255, 240, 197);
+}
+
+.board-row:nth-child(even) .square:nth-child(2n) {
+  background-color:rgb(255, 240, 197);
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.piece {
+  grid-row: 1;
+  grid-column: 1;
+  text-align: center;
+  top: -50%;
+  left: -50%;
+}
