@@ -98,7 +98,6 @@ function App() {
     return (ev) => {
       ev.preventDefault();
       var data = ev.dataTransfer.getData("id");
-      console.log(data);
       //document.getElementById(sqId).appendChild(document.getElementById(data));
       ReactDOM.render(<Piece/>, document.getElementById(sqId))
       console.log(sqId)

@@ -41,7 +41,7 @@
   height: 45px;
   width: 45px;
   display: grid;
-background-color:rgb(185, 161, 110);
+  background-color:rgb(185, 161, 110);
 }
 
 .board-row:nth-child(odd) .square:nth-child(2n + 1) {
@@ -64,4 +64,12 @@ background-color:rgb(185, 161, 110);
   text-align: center;
   top: -50%;
   left: -50%;
+}
+
+.unselectable, .piece, .square{
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }

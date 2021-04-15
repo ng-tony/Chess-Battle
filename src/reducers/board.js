@@ -24,7 +24,6 @@ const boardReducer = (state = startPosition, action) => {
             return state;
         
     };
-    console.log(newState)
     return newState;
 };
 export default boardReducer;

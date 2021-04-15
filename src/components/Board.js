@@ -9,10 +9,8 @@ const Board = ({squares, movePiece}) => {
         return (ev) => {
             ev.preventDefault();
             var draggedId = parseInt(ev.dataTransfer.getData("id"));
-            console.log(draggedId);
             if(validateMove(draggedId, id, squares)) movePiece(draggedId, id);
             //document.getElementById(sqId).appendChild(document.getElementById(data));
-            console.log(id)
             return;
         }
     }
@@ -61,9 +59,6 @@ const Piece = ({piece, pId}) => {
     const pieceDrag = (ev) => {
         ev.dataTransfer.setData("id", pId);
     }
-    console.log("test")
-    console.log(piece.letters);
-    console.log(piece_images[piece.letters])
     return (
         <div>
         <img className="piece"
