@@ -1,7 +1,7 @@
 import Piece from "../piece"
 
 
-export const edit = (loc: number, val: Piece) => ({
+export const editSquare = (loc: number, val: Piece) => ({
     type: 'EDIT',
     loc,
     val,

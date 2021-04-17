@@ -1,5 +1,6 @@
-import {decodePiece} from '../piece'
-import produce from "immer"
+import { decodePiece, PieceType} from '../piece'
+import produce from 'immer'
+
 
 const defaultState = [
     decodePiece('wr'), decodePiece('wn'), decodePiece('wb'), decodePiece('wq'), decodePiece('wk'), decodePiece('wb'), decodePiece('wn'), decodePiece('wr'),
@@ -12,23 +13,27 @@ const defaultState = [
     decodePiece('br'), decodePiece('bn'), decodePiece('bb'), decodePiece('bq'), decodePiece('bk'), decodePiece('bb'), decodePiece('bn'), decodePiece('br'),
     ]
 
-
-const boardReducer = (state = defaultState, action:any) => {
-    return produce(state, draftState => {
-            switch(action.type){
-                case 'EDIT':
-                    draftState[action.loc] = action.val;
-                    break;
-                case 'MOVE_PIECE':
-                    draftState[action.to] = draftState[action.from]
-                    draftState[action.from] = null;
-                    break;
-                default:
-                    return;
-                
-            }
+const boardReducer = (state = defaultState, action: any) => {
+    return produce(state, (draftState) => {
+        switch (action.type) {
+            case 'EDIT':
+                if (action.val.type === PieceType.Blank){
+                    draftState[action.loc] = null;
+                } else {
+                    draftState[action.loc] = action.val
+                }
+                break
+            case 'MOVE_PIECE':
+                draftState[action.to] = draftState[action.from]
+                draftState[action.from] = null
+                if (draftState[action.to]) {
+                    draftState[action.to]!.haveMoved = true
+                }
+                break
+            default:
+                return
         }
-    )
+    })
 }
 
-export default boardReducer;
+export default boardReducer

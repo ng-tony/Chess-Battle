@@ -1,17 +1,17 @@
 import Piece from '../piece'
-import React from 'react';
+import React from 'react'
 import VisualPiece from './VisualPiece'
 
-const Square = ({id, onDrop, piece}:
-    {id: number,
-    onDrop: (ev: React.DragEvent) => void,
-    piece: (Piece | null)}) => (
+//prettier-ignore
+const Square = ({ id, onDrop, piece }: 
+    { id?: number; onDrop?: (ev: React.DragEvent) => void; piece: (Piece | null) }) => (
+
     <div className="square"
-       onDragOver={(ev) => ev.preventDefault()}
-       onDrop={onDrop}
-      >
-        {piece ? <VisualPiece piece={piece} pId={id}/> : null}
-      </div>
+        onDragOver={onDrop ? (ev) => ev.preventDefault() : undefined}
+        onDrop={onDrop}
+    >
+            {piece ? <VisualPiece piece={piece} pId={id} /> : null}
+    </div>
 )
 
-export default Square;
+export default Square

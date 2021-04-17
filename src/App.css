@@ -36,6 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.board {
+}
+
 .square {
   float: left;
   height: 45px;
@@ -44,8 +48,15 @@
   background-color:rgb(185, 161, 110);
 }
 
+.board-row{
+  overflow-x: auto;
+  overflow-y: hidden;
+  height:45px;
+}
+
 .board-row:nth-child(odd) .square:nth-child(2n + 1) {
   background-color:rgb(255, 240, 197);
+  overflow:hidden;
 }
 
 .board-row:nth-child(even) .square:nth-child(2n) {
@@ -56,6 +67,24 @@
   clear: both;
   content: "";
   display: table;
+}
+
+.editor-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.editor-row:nth-child(odd) .square:nth-child(2n + 1) {
+  background-color:rgb(255, 240, 197);
+}
+
+.editor-row:nth-child(even) .square:nth-child(2n) {
+  background-color:rgb(255, 240, 197);
+}
+
+.editor {
+  padding: 5rem 0rem;
 }
 
 .piece {
