@@ -1,10 +1,10 @@
 import {pieceImages, PieceImageKey} from '../img/index'
-import Piece from '../piece'
+import PieceData from '../GameLogic'
 import { DropInfo, DropInfoType } from './Board'
 import React from 'react';
 
 const VisualPiece = ({piece, pId}: {
-    piece:Piece,
+    piece:PieceData,
     pId?:number
 }) => {
     const pieceDrag = (ev:React.DragEvent) => {

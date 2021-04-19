@@ -1,4 +1,4 @@
-import { decodePiece, PieceType} from '../piece'
+import { decodePiece, PieceType} from '../GameLogic'
 import produce from 'immer'
 
 
@@ -30,6 +30,11 @@ const boardReducer = (state = defaultState, action: any) => {
                     draftState[action.to]!.haveMoved = true
                 }
                 break
+            case 'ADD_POWERUP':
+                if (draftState[action.loc]) {
+                    draftState[action.loc]!.powerUps.push(action.powerUp);
+                }
+                break  
             default:
                 return
         }

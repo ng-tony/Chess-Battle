@@ -1,15 +1,16 @@
 import { connect } from 'react-redux'
-import { movePiece, editSquare } from '../actions'
+import { movePiece, editSquare, addPower } from '../actions'
 import Board from '../components/Board'
-import Piece from '../piece'
+import PieceData, {PowerUpData} from '../GameLogic'
 
-const mapStateToProps = (state:{board:Piece[]}) => ({
+const mapStateToProps = (state:{board:PieceData[]}) => ({
   squares: state.board
 })
 
-const mapDispatchToProps = (dispatch:(action:any)=>void)  => ({
+const mapDispatchToProps = (dispatch:(action:any) => void)  => ({
   movePiece: (from:number, to:number) => dispatch(movePiece(from, to)),
-  editSquare: (loc:number, piece:Piece) => dispatch(editSquare(loc, piece))
+  editSquare: (loc:number, piece:PieceData) => dispatch(editSquare(loc, piece)),
+  addPower: (loc:number, powerUp: PowerUpData) => dispatch(addPower(loc, powerUp))
 })
 
 export default connect(

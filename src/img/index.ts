@@ -13,7 +13,15 @@ import wq from "./wq.svg";
 import wr from "./wr.svg";
 import wz from "./blank.svg";
 
+import Guard from "./placeholder.svg";
+import Shield from "./placeholder.svg";
+import Sword from "./placeholder.svg";
+import Flail from "./placeholder.svg";
+
 
 
 export const pieceImages = { bb, bk, bn, bp, bq, br, bz, wb, wk, wn, wp, wq, wr, wz}
+export const powerUpImages = { Guard, Shield, Sword, Flail };
+
 export type PieceImageKey = keyof typeof pieceImages;
+export type powerUpImageKey = keyof typeof powerUpImages;

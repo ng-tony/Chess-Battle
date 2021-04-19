@@ -54,15 +54,6 @@
   height:45px;
 }
 
-.board-row:nth-child(odd) .square:nth-child(2n + 1) {
-  background-color:rgb(255, 240, 197);
-  overflow:hidden;
-}
-
-.board-row:nth-child(even) .square:nth-child(2n) {
-  background-color:rgb(255, 240, 197);
-}
-
 .board-row:after {
   clear: both;
   content: "";
@@ -75,11 +66,15 @@
   display: table;
 }
 
-.editor-row:nth-child(odd) .square:nth-child(2n + 1) {
+.board-row:nth-child(odd) .square:nth-child(2n + 1),
+.editor-row:nth-child(odd) .square:nth-child(2n + 1),
+.powerup-editor-row:nth-child(odd) .square:nth-child(2n + 1) {
   background-color:rgb(255, 240, 197);
 }
 
-.editor-row:nth-child(even) .square:nth-child(2n) {
+.board-row:nth-child(even) .square:nth-child(2n),
+.editor-row:nth-child(even) .square:nth-child(2n),
+.powerup-editor-row:nth-child(even) .square:nth-child(2n) {
   background-color:rgb(255, 240, 197);
 }
 

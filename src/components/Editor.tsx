@@ -1,6 +1,6 @@
 import React from "react";
-import Square from "./Square";
-import {decodePiece} from '../piece'
+import Square, {SquareData} from "./Square";
+import {decodePiece} from '../GameLogic'
 
 const Editor =  () => {
     const whitePieces =[
@@ -16,12 +16,18 @@ const Editor =  () => {
     return <div className="editor">
         <div className="editor-row">
             {whitePieces.map((piece, i) => {
-                return <Square piece={piece}/>
+                let squareData : SquareData = {
+                    piece,
+                }
+                return <Square squareData={squareData}/>
             })}
         </div>
         <div className="editor-row">
             {blackPieces.map((piece, i) => {
-                return <Square piece={piece}/>
+                let squareData : SquareData = {
+                    piece,
+                }
+                return <Square squareData={squareData}/>
             })}
         </div>
     </div>

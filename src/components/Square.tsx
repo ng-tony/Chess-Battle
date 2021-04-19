@@ -1,16 +1,28 @@
-import Piece from '../piece'
+import PieceData, { PowerUpData } from '../GameLogic'
 import React from 'react'
 import VisualPiece from './VisualPiece'
+import PowerUp from './PowerUp'
+
+
+export interface SquareData  {
+    id?: number
+    piece?: PieceData | null,
+    powerUp?: PowerUpData,
+    onDrop?: (ev: React.DragEvent) => void
+}
 
 //prettier-ignore
-const Square = ({ id, onDrop, piece }: 
-    { id?: number; onDrop?: (ev: React.DragEvent) => void; piece: (Piece | null) }) => (
+const Square = ({ squareData }: 
+    {
+     onDrop?: (ev: React.DragEvent) => void;
+     squareData: (SquareData) }) => (
 
     <div className="square"
-        onDragOver={onDrop ? (ev) => ev.preventDefault() : undefined}
-        onDrop={onDrop}
+        onDragOver={squareData.onDrop ? (ev) => ev.preventDefault() : undefined}
+        onDrop={squareData.onDrop}
     >
-            {piece ? <VisualPiece piece={piece} pId={id} /> : null}
+        {squareData.piece ? <VisualPiece piece={squareData.piece} pId={squareData.id} /> : null}
+        {squareData.powerUp ? <PowerUp powerUp = {squareData.powerUp} /> : null}
     </div>
 )
 
