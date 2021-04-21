@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import {createStore, compose} from 'redux';
 import allReducer from './reducers'
 import { Provider } from 'react-redux';
-import Editor from './components/Editor';
 
 declare global {
   interface Window {

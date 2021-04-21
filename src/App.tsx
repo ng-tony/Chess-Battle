@@ -8,9 +8,11 @@ import PowerUpEditor from "./components/PowerUpEditor"
 function App() {
   return (
     <div className="App">
-      <VisibleBoard />
-      <Editor />
-      <PowerUpEditor />
+      <div className="container">
+        <VisibleBoard />
+        <Editor />
+        <PowerUpEditor />
+      </div>
     </div>
   );
 }

@@ -14,21 +14,23 @@ const Editor =  () => {
                         decodePiece('bz'),
                        ]
     return <div className="editor">
-        <div className="editor-row">
-            {whitePieces.map((piece, i) => {
-                let squareData : SquareData = {
-                    piece,
-                }
-                return <Square squareData={squareData}/>
-            })}
-        </div>
-        <div className="editor-row">
-            {blackPieces.map((piece, i) => {
-                let squareData : SquareData = {
-                    piece,
-                }
-                return <Square squareData={squareData}/>
-            })}
+        <div className="container">
+            <div className="row">
+                {whitePieces.map((piece, i) => {
+                    let squareData : SquareData = {
+                        piece,
+                    }
+                    return <Square squareData={squareData}/>
+                })}
+            </div>
+            <div className="row">
+                {blackPieces.map((piece, i) => {
+                    let squareData : SquareData = {
+                        piece,
+                    }
+                    return <Square squareData={squareData}/>
+                })}
+            </div>
         </div>
     </div>
 }

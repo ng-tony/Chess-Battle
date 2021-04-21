@@ -23,7 +23,6 @@ const VisualPiece = ({piece, pId}: {
         ev?.dataTransfer?.setData("dropInfo", JSON.stringify(dropInfo));
     }
     return (
-        <div>
         <img className="piece"
             draggable={piece ? true: false}
             onDragStart={piece ? pieceDrag : () => false}
@@ -31,7 +30,6 @@ const VisualPiece = ({piece, pId}: {
             alt={pId ? pId.toString() : "null"}
             id={pId ? pId.toString() : "null"}
         />
-        </div>
         )
 }
 

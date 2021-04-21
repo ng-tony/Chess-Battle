@@ -44,9 +44,10 @@ const Board = ({squares, movePiece, editSquare, addPower}:{
     }
     return (
         <div className="board">
+            <div className="container">
             {Array(8).fill(null).map((_, i) => {
                 return (
-                    <div className="board-row" key={i}>
+                    <div className="row" key={i}>
                         {squares.slice(i*8, i*8 + 8).map((square, j) => {
                             const id = i*8 + j;
                             let squareData: SquareData = {
@@ -63,6 +64,7 @@ const Board = ({squares, movePiece, editSquare, addPower}:{
                     </div>
                     )
             })}
+            </div>
         </div>
     );
 }
