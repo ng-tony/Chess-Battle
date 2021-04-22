@@ -3,7 +3,7 @@
     "target": "ES2015",
     "module": "esnext",
     "allowJs": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,

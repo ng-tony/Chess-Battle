@@ -1,4 +1,4 @@
-import {pieceImages, PieceImageKey, powerUpImages, PowerUpImageKey} from '../img/index'
+import {pieceImages, PieceImageKey, powerUpImages, PowerUpImageKey} from '../assets/img/index'
 import PieceData from '../GameLogic'
 import { DropInfo, DropInfoType } from './Board'
 import React from 'react';

@@ -1,6 +1,7 @@
 import React from 'react'
 import PieceData, { decodePiece, PowerUpData } from '../GameLogic'
 import Square, {SquareData} from './Square'
+import {sounds} from '../assets/sounds/index'
 
 import {validateMove, PowerUpType} from '../GameLogic'
 
@@ -17,6 +18,9 @@ export interface DropInfo {
     powerUp?: PowerUpData,
 }
 
+const moveAudio = new Audio(sounds.move);
+console.log(moveAudio);
+const captureAudio = new Audio(sounds.capture);
 
 const Board = ({squares, movePiece, editSquare, addPower, removePower}:{
         squares:(PieceData | null)[],
@@ -31,18 +35,22 @@ const Board = ({squares, movePiece, editSquare, addPower, removePower}:{
             let dropInfo = JSON.parse(ev.dataTransfer.getData("dropInfo")) as DropInfo;
             switch (dropInfo.type) {
                 case DropInfoType.move:
-                    if(validateMove(dropInfo.id!, id, squares)) movePiece(dropInfo.id!, id);
-                    return;
+                    if(validateMove(dropInfo.id!, id, squares)) {
+                        movePiece(dropInfo.id!, id);
+                        moveAudio.play()
+                    }
+                    break;
                 case DropInfoType.editSquare:
                     editSquare(id, decodePiece(dropInfo.letters!));
-                    return;
+                    moveAudio.play()
+                    break;
                 case DropInfoType.addPowerUp:
                     if (dropInfo.powerUp)
                         if(dropInfo.powerUp.type === PowerUpType.Clear)
                             removePower(id);
                         else
                             addPower(id, dropInfo.powerUp);
-                    return;
+                    break;
             }
         }
     }

@@ -1,4 +1,4 @@
-import {powerUpImages, PowerUpImageKey} from '../img/index'
+import {powerUpImages, PowerUpImageKey} from '../assets/img/index'
 import {PowerUpData} from '../GameLogic'
 import { DropInfoType } from './Board'
 import React from 'react';
@@ -21,7 +21,6 @@ const PowerUp = ({powerUp}: {
             src={powerUpImages[powerUp.type as PowerUpImageKey]}
             alt={powerUp.type.toString()}
         />
-
         )
 }
 
