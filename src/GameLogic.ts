@@ -277,13 +277,23 @@ const guardStrategy = (loc: number, squares: (PieceData | null)[], move: number)
 
 const swordStrategy = (loc: number, squares: (PieceData | null)[], move: number): (PieceData | null)[] => {
     if(hasPowerUp(squares, move, PowerUpType.Sword)){
-        for (const m of [8, -8, 1, -1].map((a) => a + move)){
+        for (const m of [8, -8].map((a) => a + move)){
             if (squares[m] &&
                 squares[m]?.color !== squares[move]?.color &&
                 !hasPowerUp(squares, m, PowerUpType.Shield)){
                     squares[m] = null;
             }
         }
+        for (const m of [1, -1].map((a) => a + move)){
+            if (squares[m] &&
+                squares[m]?.color !== squares[move]?.color &&
+                !hasPowerUp(squares, m, PowerUpType.Shield) &&
+                !horizontalOutBoundCheck(move, m)){
+                    squares[m] = null;
+            }
+        }
+
+      
     }
     return squares;
 }
@@ -293,7 +303,8 @@ const flailStrategy = (loc: number, squares: (PieceData | null)[], move: number)
         for (const m of [9, -9, 7, -7].map((a) => a + move)){
             if (squares[m] &&
                 squares[m]?.color !== squares[move]?.color  &&
-                !hasPowerUp(squares, m, PowerUpType.Shield)){
+                !hasPowerUp(squares, m, PowerUpType.Shield) && 
+                !diagonalOutBoundCheck(move, m)){
                     squares[m] = null;
             }
         }
