@@ -1,12 +1,14 @@
 import React from "react";
 import Square, {SquareData} from "./Square";
-import {PowerUpType} from "../GameLogic"
+import {PowerUpType, PowerUpData} from "../GameLogic"
 
 const PowerUpEditor =  () => {
-    const powerUps = [
-        {type: PowerUpType.Guard}, {type: PowerUpType.Shield},
-        {type: PowerUpType.Sword}, {type: PowerUpType.Flail},
-    ]
+    const powerUps:PowerUpData[] = []
+
+    for(const pupType in PowerUpType)
+        powerUps.push({type: pupType} as PowerUpData)
+    
+    console.log(powerUps)
     return <div className="powerup-editor">
         <div className="container">
             <div className="row">

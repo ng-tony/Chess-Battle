@@ -2,7 +2,7 @@ import React from 'react'
 import PieceData, { decodePiece, PowerUpData } from '../GameLogic'
 import Square, {SquareData} from './Square'
 
-import {validateMove} from '../GameLogic'
+import {validateMove, PowerUpType} from '../GameLogic'
 
 export enum DropInfoType {
     move,
@@ -18,11 +18,12 @@ export interface DropInfo {
 }
 
 
-const Board = ({squares, movePiece, editSquare, addPower}:{
+const Board = ({squares, movePiece, editSquare, addPower, removePower}:{
         squares:(PieceData | null)[],
         movePiece:(from: number, to: number) => void,
         editSquare:(loc:number, piece: PieceData) => void,
         addPower:(loc:number, powerUp: PowerUpData) => void,
+        removePower:(loc:number) => void,
     }) => {
     const squareDrop = (id: number) => {
         return (ev: React.DragEvent) => {
@@ -37,7 +38,10 @@ const Board = ({squares, movePiece, editSquare, addPower}:{
                     return;
                 case DropInfoType.addPowerUp:
                     if (dropInfo.powerUp)
-                        addPower(id, dropInfo.powerUp)
+                        if(dropInfo.powerUp.type === PowerUpType.Clear)
+                            removePower(id);
+                        else
+                            addPower(id, dropInfo.powerUp);
                     return;
             }
         }

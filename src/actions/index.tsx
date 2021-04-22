@@ -18,3 +18,8 @@ export const addPower = (loc: number, powerUpData: PowerUpData) => ({
     loc,
     powerUp: powerUpData
 })
+
+export const removePowers = (loc: number) => ({
+    type: 'REMOVE_POWERUPS',
+    loc,
+})

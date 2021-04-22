@@ -1,8 +1,8 @@
 import PieceData, { PowerUpData } from '../GameLogic'
 import React from 'react'
-import VisualPiece from './VisualPiece'
+import Piece from './Piece'
 import PowerUp from './PowerUp'
-import invSquare from '../img/1x1.png'
+
 
 
 export interface SquareData  {
@@ -22,9 +22,9 @@ const Square = ({ squareData }:
         onDragOver={squareData.onDrop ? (ev) => ev.preventDefault() : undefined}
         onDrop={squareData.onDrop}
     >
-        {squareData.piece === null ? <img className="empty" src={invSquare} alt=""/> :
+        {squareData.piece === null ? <div className="empty"></div> :
             squareData.piece === undefined ? null :
-            <VisualPiece piece={squareData.piece} pId={squareData.id} /> }
+            <Piece piece={squareData.piece} pId={squareData.id} /> }
         {squareData.powerUp ? <PowerUp powerUp = {squareData.powerUp} /> : null}
     </div>
 )

@@ -10,8 +10,10 @@ function App() {
     <div className="App">
       <div className="container">
         <VisibleBoard />
-        <Editor />
-        <PowerUpEditor />
+        <div className="editors">
+          <Editor />
+          <PowerUpEditor />
+        </div>
       </div>
     </div>
   );

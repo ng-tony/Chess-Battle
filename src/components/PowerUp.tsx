@@ -1,4 +1,4 @@
-import {powerUpImages, powerUpImageKey} from '../img/index'
+import {powerUpImages, PowerUpImageKey} from '../img/index'
 import {PowerUpData} from '../GameLogic'
 import { DropInfoType } from './Board'
 import React from 'react';
@@ -15,14 +15,13 @@ const PowerUp = ({powerUp}: {
         ev?.dataTransfer?.setData("dropInfo", JSON.stringify(dropInfo));
     }
     return (
-        <div>
         <img className="powerUp"
             draggable={true}
             onDragStart={powerUpDrag}
-            src={powerUpImages[powerUp.type as powerUpImageKey]}
+            src={powerUpImages[powerUp.type as PowerUpImageKey]}
             alt={powerUp.type.toString()}
         />
-        </div>
+
         )
 }
 

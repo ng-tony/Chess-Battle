@@ -1,6 +1,13 @@
 body {
   margin: 0;
-  background-color: rgb(34, 34, 34)
+  background-color: rgb(34, 34, 34);
+  height: 100vh;
+  width: 100vw;
+}
+
+#root{
+  height: 100%;
+  width: 100%;
 }
 
 :root {
@@ -11,15 +18,12 @@ body {
   --board-size: 60%;
 }
 
-.board {
-  position: relative;
-  margin: auto;
-  width:65%;
+.App {
+  height: 100%;
+  width: 100%;
 }
 
-.App .container{
-  padding: 2rem 0;
-}
+
 
 .container {
   position: relative;
@@ -44,18 +48,15 @@ body {
   width:100%;
 }
 
-.board .container{
-  height: 100%;
-}
-
-.board .row{
-  height: 12.5%;
-}
 
 .empty{
   height: auto;
   width:100%;
   visibility: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-bottom: 100%;
+  background-image: url("../src/img/1x1.png");
 }
 
 .row:nth-child(odd) .square:nth-child(2n + 1){
@@ -65,22 +66,66 @@ body {
   background-color:var(--light-square-color);
 }
 
+.board {
+  position: relative;
+  margin: auto;
+  width:100%;
+  padding: 20px;
+}
+
 .editor {
   margin:auto;
   position: relative;
-  width:60%;
+  width:80%;
   height: auto;
 }
 
+.App > .container{
+  /* padding: 2rem 0; */
+  flex-flow: row wrap;
+  height: 100%;
+  width: 100%;
+}
+
+@media screen and (min-aspect-ratio: 4/5) {
+  .App > .container {
+    flex-flow: row nowrap;
+  }
+  .App > .container > .editors {
+    flex-grow: 1;
+    width: 20%;
+  }
+  .App > .container > .board {
+    width: 95%;
+  }
+  
+}
+
+.App > .container > .editors {
+  display:flex;
+  flex-flow: row wrap;
+  width:100%;
+}
 
 .powerup-editor {
+  flex-shrink: 1;
   margin: auto;
   position: relative;
-  width:60%;
+  width:50%;
+}
+
+.piece {
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-bottom: 100%;
+}
+
+.piece:after {
+  padding-bottom: 100%;
 }
 
 
-.unselectable, .piece, .square{
+.unselectable, .square{
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
