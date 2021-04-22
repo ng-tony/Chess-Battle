@@ -238,32 +238,32 @@ const filterCaptureMoves = (
     }
 }
 
-const hasPowerUp = (square: (PieceData | null), pupType:PowerUpType ) => {
-    return square && square!.powerUps.length > 0 && square?.powerUps.reduce( (acc, powerUp) => {
-        return acc || powerUp.type === PowerUpType.Shield
+const hasPowerUp = (squares: (PieceData | null)[],  move:number, pupType:PowerUpType) => {
+    return squares[move] && squares[move]!.powerUps.length > 0 && squares[move]?.powerUps.reduce( (acc, powerUp) => {
+        return acc || powerUp.type === pupType
     }, false)
 }
 
 const shieldStrategy = (loc: number, squares: (PieceData | null)[], move: number): boolean => {
-    if(squares[move] &&
-        squares[move]!.powerUps.length > 0 &&
-        squares[move]?.powerUps.reduce( (acc, powerUp) => {
-            return acc || powerUp.type === PowerUpType.Shield
-        }, false)) {
+    if(hasPowerUp(squares, move, PowerUpType.Shield)) {
+        return false;
+    }
+    return true;
+}
+
+const guardStrategy = (loc: number, squares: (PieceData | null)[], move: number): boolean => {
+    if(hasPowerUp(squares, move, PowerUpType.Guard)) {
         return false;
     }
     return true;
 }
 
 const swordStrategy = (loc: number, squares: (PieceData | null)[], move: number): (PieceData | null)[] => {
-    if(squares[move] &&
-        squares[move]!.powerUps.length > 0 &&
-        squares[move]?.powerUps.reduce( (acc, powerUp) => {
-            return acc || powerUp.type === PowerUpType.Sword
-        }, false)) {
+    if(hasPowerUp(squares, move, PowerUpType.Sword)){
         for (const m of [8, -8, 1, -1].map((a) => a + move)){
             if (squares[m] &&
-                squares[m]?.color !== squares[move]?.color){
+                squares[m]?.color !== squares[move]?.color &&
+                !hasPowerUp(squares, m, PowerUpType.Shield)){
                     squares[m] = null;
             }
         }
@@ -272,14 +272,11 @@ const swordStrategy = (loc: number, squares: (PieceData | null)[], move: number)
 }
 
 const flailStrategy = (loc: number, squares: (PieceData | null)[], move: number): (PieceData | null)[] => {
-    if(squares[move] &&
-        squares[move]!.powerUps.length > 0 &&
-        squares[move]?.powerUps.reduce( (acc, powerUp) => {
-            return acc || powerUp.type === PowerUpType.Flail
-        }, false)) {
+    if(hasPowerUp(squares, move, PowerUpType.Flail)){
         for (const m of [9, -9, 7, -7].map((a) => a + move)){
             if (squares[m] &&
-                squares[m]?.color !== squares[move]?.color){
+                squares[m]?.color !== squares[move]?.color  &&
+                !hasPowerUp(squares, m, PowerUpType.Shield)){
                     squares[m] = null;
             }
         }
@@ -326,7 +323,6 @@ const filterWithStrategies =(
             });
         };
 }
-
 
 
 const pieceMoveStrategies = {

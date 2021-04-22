@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="45"
+   height="45"
+   viewBox="0 0 45 45"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="flail.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="15.839192"
+     inkscape:cx="2.6423903"
+     inkscape:cy="24.285148"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     inkscape:window-width="1346"
+     inkscape:window-height="1198"
+     inkscape:window-x="312"
+     inkscape:window-y="173"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid28" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#0071ff;fill-opacity:0.0980392;stroke:#2d57ff;stroke-width:0.938933px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.780392"
+       d="M 26.692359,4 C 2.2801132,36.862639 2.2801132,37.801571 2.2801132,37.801571 L 5.0969107,38.740504 28.570224,5.8778651 Z"
+       id="path869" />
+    <circle
+       style="fill:#0071ff;fill-opacity:0.0967742;stroke:#2d57ff;stroke-width:0.938933;stroke-opacity:0.782258"
+       id="path871"
+       cx="29.696526"
+       cy="9.0503368"
+       r="1.8778651" />
+    <circle
+       style="fill:#0071ff;fill-opacity:0.0967742;stroke:#2d57ff;stroke-width:0.938933;stroke-opacity:0.782258"
+       id="path871-5"
+       cx="31.39864"
+       cy="13.291916"
+       r="1.8778651" />
+    <circle
+       style="fill:#0071ff;fill-opacity:0.0967742;stroke:#2d57ff;stroke-width:0.938933;stroke-opacity:0.782258"
+       id="path871-7"
+       cx="32.612816"
+       cy="17.747379"
+       r="1.8778651" />
+    <circle
+       style="fill:#0071ff;fill-opacity:0.0967742;stroke:#2d57ff;stroke-width:0.938933;stroke-opacity:0.782258"
+       id="path871-1"
+       cx="33.769798"
+       cy="22.256756"
+       r="1.8778651" />
+    <circle
+       style="fill:#0071ff;fill-opacity:0.0967742;stroke:#2d57ff;stroke-width:0.938933;stroke-opacity:0.782258"
+       id="path871-9"
+       cx="34.777546"
+       cy="26.811712"
+       r="1.8778651" />
+    <circle
+       style="fill:#0071ff;fill-opacity:0.0967742;stroke:#2d57ff;stroke-width:0.850014;stroke-opacity:0.782258"
+       id="path929"
+       cx="34.88076"
+       cy="35.049858"
+       r="5.5250907" />
+  </g>
+</svg>

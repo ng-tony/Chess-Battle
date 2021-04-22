@@ -31,7 +31,7 @@ const VisualPiece = ({piece, pId}: {
             <div className="piece"
                 draggable={piece ? true: false}
                 onDragStart={piece ? pieceDrag : () => false}
-                id={pId && pId !== 0 ? pId.toString() : "null"}
+                id={pId !== undefined && pId !== 0 ? pId.toString() : "null"}
                 style={{
                     backgroundImage: layeredImages,
                 }
