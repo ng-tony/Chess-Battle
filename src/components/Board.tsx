@@ -18,7 +18,7 @@ export interface DropInfo {
     powerUp?: PowerUpData,
 }
 
-const moveAudio = new Audio(sounds.move);
+const moveAudio = new Audio(sounds.move.default);
 console.log(moveAudio);
 const captureAudio = new Audio(sounds.capture);
 
@@ -36,6 +36,7 @@ const Board = ({squares, movePiece, editSquare, addPower, removePower}:{
             switch (dropInfo.type) {
                 case DropInfoType.move:
                     if(validateMove(dropInfo.id!, id, squares)) {
+                        console.log(dropInfo.id!, id, squares);
                         movePiece(dropInfo.id!, id);
                         moveAudio.play()
                     }

@@ -23,7 +23,7 @@ const Square = ({ squareData }:
         onDrop={squareData.onDrop}
     >
         {squareData.piece === null ? <div className="empty"></div> :
-            squareData.piece === undefined ? null :
+         squareData.piece === undefined ? null :
             <Piece piece={squareData.piece} pId={squareData.id} /> }
         {squareData.powerUp ? <PowerUp powerUp = {squareData.powerUp} /> : null}
     </div>

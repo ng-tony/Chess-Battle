@@ -96,6 +96,20 @@ const filterInvalidMoves = (
     })
 }
 
+const horizontalOutBoundCheck = (prev:number, move: number) => {
+    const prevRow = Math.floor(prev/BOARD_SIZE);
+    const moveRow = Math.floor(move/BOARD_SIZE);
+    return prevRow !== moveRow;
+}
+
+
+const diagonalOutBoundCheck = (prev:number, move: number) => {
+    //handled with out of bounds
+    const prevRow = Math.floor(prev/BOARD_SIZE);
+    const moveRow = Math.floor(move/BOARD_SIZE);
+    return prevRow === moveRow || Math.abs(prevRow - moveRow) > 1;
+}
+
 const checkCheck = (color: Color, squares: (PieceData | null)[]): boolean => {
     for (const [i, square] of squares.entries()) {
         if (!square || square!.color === color) continue
@@ -170,19 +184,22 @@ const pawnMoves = (loc: number, squares: (PieceData | null)[]): number[] => {
 const queenMoves = (loc: number, squares: (PieceData | null)[]): number[] => {
     let potential_moves = []
     const operations = [
-        (n: number) => loc + n * 9,
-        (n: number) => loc + n * -9,
-        (n: number) => loc + n * 7,
-        (n: number) => loc + n * -7,
-        (n: number) => loc + n * 8,
-        (n: number) => loc + n * -8,
-        (n: number) => loc + n * 1,
-        (n: number) => loc + n * -1,
+        {op: (n: number) => loc + n * -9, boundCheck: diagonalOutBoundCheck},
+        {op: (n: number) => loc + n * 9, boundCheck: diagonalOutBoundCheck},
+        {op: (n: number) => loc + n * 7, boundCheck: diagonalOutBoundCheck},
+        {op: (n: number) => loc + n * -7, boundCheck: diagonalOutBoundCheck},
+        {op: (n: number) => loc + n * 8, boundCheck: (prev: number, m:number) => false},
+        {op: (n: number) => loc + n * -8, boundCheck: (prev: number, m:number) => false},
+        {op: (n: number) => loc + n * 1, boundCheck: horizontalOutBoundCheck},
+        {op: (n: number) => loc + n * -1, boundCheck: horizontalOutBoundCheck},
     ]
-    for (const op of operations) {
-        for (let i = 1; i < BOARD_SIZE; i++) {
-            potential_moves.push(op(i))
-            if (squares[op(i)]) break
+    for (const operation of operations) {
+        for (let i = 1, prev = loc; i < BOARD_SIZE; i++) {
+            let curr = operation.op(i)
+            if(operation.boundCheck(prev,curr)) break;
+            potential_moves.push(curr)
+            if (squares[curr]) break
+            prev = curr;
         }
     }
     return filterInvalidMoves(potential_moves, loc, squares)

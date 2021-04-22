@@ -9,7 +9,7 @@ const VisualPiece = ({piece, pId}: {
 }) => {
     const pieceDrag = (ev:React.DragEvent) => {
         let dropInfo: DropInfo;
-        if (pId) {
+        if (pId as number >= 0) {
             dropInfo = {
                 type: DropInfoType.move,
                 id: pId,
@@ -31,7 +31,7 @@ const VisualPiece = ({piece, pId}: {
             <div className="piece"
                 draggable={piece ? true: false}
                 onDragStart={piece ? pieceDrag : () => false}
-                id={pId !== undefined && pId !== 0 ? pId.toString() : "null"}
+                id={pId !== undefined ? pId.toString() : "null"}
                 style={{
                     backgroundImage: layeredImages,
                 }
