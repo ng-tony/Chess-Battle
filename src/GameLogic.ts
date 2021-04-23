@@ -268,11 +268,15 @@ const shieldStrategy = (loc: number, squares: (PieceData | null)[], move: number
     return true;
 }
 
-const guardStrategy = (loc: number, squares: (PieceData | null)[], move: number): boolean => {
-    if(hasPowerUp(squares, move, PowerUpType.Guard)) {
-        return false;
+const guardStrategy = (loc: number, squares: (PieceData | null)[], move: number): (PieceData | null)[] => {
+    for (const [i, square] of squares.entries()) {
+        if (!square || square!.color === squares[move]?.color) continue
+        if(hasPowerUp(squares, i, PowerUpType.Guard) &&
+            getCaptureMoves(i, squares).includes(move)) {
+            return moveSucessResults(i, move, squares)
+        }
     }
-    return true;
+    return squares;
 }
 
 const swordStrategy = (loc: number, squares: (PieceData | null)[], move: number): (PieceData | null)[] => {
@@ -322,6 +326,7 @@ export const moveSucessStrategies:(
     (loc:number, squares: (PieceData | null)[], move:number) => (PieceData | null)[])[] = [
         swordStrategy,
         flailStrategy,
+        guardStrategy,
     ];
 
 export const moveSucessResults = (
