@@ -96,18 +96,19 @@ const filterInvalidMoves = (
     })
 }
 
-const horizontalOutBoundCheck = (prev:number, move: number) => {
+const moveWrappedRow = (prev:number, move:number, expectedRowChange:number) => {
     const prevRow = Math.floor(prev/BOARD_SIZE);
     const moveRow = Math.floor(move/BOARD_SIZE);
-    return prevRow !== moveRow;
+    return Math.abs(prevRow - moveRow) - expectedRowChange;
+}
+
+const horizontalOutBoundCheck = (prev:number, move: number) => {
+    return moveWrappedRow(prev, move, 0);
 }
 
 
 const diagonalOutBoundCheck = (prev:number, move: number) => {
-    //handled with out of bounds
-    const prevRow = Math.floor(prev/BOARD_SIZE);
-    const moveRow = Math.floor(move/BOARD_SIZE);
-    return prevRow === moveRow || Math.abs(prevRow - moveRow) > 1;
+    return moveWrappedRow(prev, move, 1);
 }
 
 const checkCheck = (color: Color, squares: (PieceData | null)[]): boolean => {
@@ -125,64 +126,99 @@ const checkCheck = (color: Color, squares: (PieceData | null)[]): boolean => {
 }
 
 const bishopMoves = (loc: number, squares: (PieceData | null)[]): number[] => {
-    let potential_moves = []
+    let potentialMoves = []
     //Move in the four diagonal directions
     const operations = [
-        (n: number) => loc + n * 9,
-        (n: number) => loc + n * -9,
-        (n: number) => loc + n * 7,
-        (n: number) => loc + n * -7,
+        {op: (n: number) => loc + n * -9, boundCheck: diagonalOutBoundCheck},
+        {op: (n: number) => loc + n * 9, boundCheck: diagonalOutBoundCheck},
+        {op: (n: number) => loc + n * 7, boundCheck: diagonalOutBoundCheck},
+        {op: (n: number) => loc + n * -7, boundCheck: diagonalOutBoundCheck},
     ]
-    for (let op of operations) {
-        for (let i = 1; i < BOARD_SIZE; i++) {
-            potential_moves.push(op(i))
+    for (let {op, boundCheck} of operations) {
+        for (let i = 1, prev = loc; i < BOARD_SIZE; i++) {
+            if(boundCheck(prev,op(i))) break;
+            potentialMoves.push(op(i))
             if (squares[op(i)]) break
+            prev = loc
         }
     }
-    return filterInvalidMoves(potential_moves, loc, squares)
+    return filterInvalidMoves(potentialMoves, loc, squares)
 }
 
 //Need to implement Castling
 const kingMoves = (loc: number, squares: (PieceData | null)[]): number[] => {
-    let potentialMoves = [-9, -8, -7, -1, 1, 7, 8, 9].map((a) => a + loc)
-    potentialMoves = filterInvalidMoves(potentialMoves, loc, squares)
+    let potentialMoves = [
+        { relCoord: -9, expectedRowMovement: 1 },
+        { relCoord: -8, expectedRowMovement: 1 },
+        { relCoord: -7, expectedRowMovement: 1 },
+        { relCoord: -1, expectedRowMovement: 1 },
+        { relCoord: 1, expectedRowMovement: 0 },
+        { relCoord: 7, expectedRowMovement: 0 },
+        { relCoord: 8, expectedRowMovement: 1 },
+        { relCoord: 9, expectedRowMovement: 1 },
+    ]
+    let filteredMoves = convertPotentialMoveToActual(loc, squares, potentialMoves);
+    //Check if walking into a check
     if (squares[loc]?.type !== PieceType.King) return []
-    potentialMoves = potentialMoves.filter((move) => {
+    filteredMoves = filteredMoves.filter((move) => {
         let newSquares = [...squares]
         newSquares[move] = newSquares[loc]
         newSquares[loc] = null
         return !checkCheck(squares[loc]!.color, newSquares)
     })
-    return potentialMoves
+    return filteredMoves;
 }
 
 const knightMoves = (loc: number, squares: (PieceData | null)[]): number[] => {
-    let potential_moves = [10, 17, 6, 15, -10, -17, -6, -15].map((n) => n + loc)
-    return filterInvalidMoves(potential_moves, loc, squares)
+    const potentialMoves = [
+        { relCoord: 10, expectedRowMovement: 1 },
+        { relCoord: 17, expectedRowMovement: 2 },
+        { relCoord: 6, expectedRowMovement: 1 },
+        { relCoord: 15, expectedRowMovement: 2 },
+        { relCoord: -10, expectedRowMovement: 1 },
+        { relCoord: -17, expectedRowMovement: 2 },
+        { relCoord: -6, expectedRowMovement: 1 },
+        { relCoord: -15, expectedRowMovement: 2 },
+    ];
+    return convertPotentialMoveToActual(loc, squares, potentialMoves);
+}
+
+const convertPotentialMoveToActual = (loc:number, squares: (PieceData | null)[], potentialMoves: {relCoord:number, expectedRowMovement:number}[]) => {
+    return filterInvalidMoves(
+        potentialMoves.map(({ relCoord, expectedRowMovement }) => {
+            return { coord: relCoord + loc, expectedRowMovement }
+        }).filter(({ coord, expectedRowMovement }) => {
+            return !moveWrappedRow(loc, coord, expectedRowMovement);
+        }).map(({coord})=> {
+            return coord;
+        }),
+        loc,
+        squares);
 }
 
 const pawnMoves = (loc: number, squares: (PieceData | null)[]): number[] => {
-    let potential_moves = []
+    let potentialMoves = []
     let [op, startingPos] =
         squares[loc]?.color === Color.white
             ? [(b: number) => loc + b, Math.floor(loc / 8) === 1]
             : [(b: number) => loc - b, Math.floor(loc / 8) === 6]
 
     //Normal Move
-    potential_moves.push(op(8))
+    potentialMoves.push(op(8))
 
     //Double Move
     if (startingPos) {
-        potential_moves.push(op(16))
+        potentialMoves.push(op(16))
     }
-    const moves = filterInvalidMoves(potential_moves, loc, squares)
+    const moves = filterInvalidMoves(potentialMoves, loc, squares)
     return moves
         .filter((move) =>  squares[move] === null)
         .concat(pawnAttackMoves(loc, squares));
 }
 
 const queenMoves = (loc: number, squares: (PieceData | null)[]): number[] => {
-    let potential_moves = []
+    let potentialMoves = []
+    //Vertical bound checks are handled with out of bounds checks
     const operations = [
         {op: (n: number) => loc + n * -9, boundCheck: diagonalOutBoundCheck},
         {op: (n: number) => loc + n * 9, boundCheck: diagonalOutBoundCheck},
@@ -193,33 +229,34 @@ const queenMoves = (loc: number, squares: (PieceData | null)[]): number[] => {
         {op: (n: number) => loc + n * 1, boundCheck: horizontalOutBoundCheck},
         {op: (n: number) => loc + n * -1, boundCheck: horizontalOutBoundCheck},
     ]
-    for (const operation of operations) {
+    for (const {op, boundCheck} of operations) {
         for (let i = 1, prev = loc; i < BOARD_SIZE; i++) {
-            let curr = operation.op(i)
-            if(operation.boundCheck(prev,curr)) break;
-            potential_moves.push(curr)
-            if (squares[curr]) break
-            prev = curr;
+            if(boundCheck(prev,op(i))) break;
+            potentialMoves.push(op(i))
+            if (squares[op(i)]) break
+            prev = op(i);
         }
     }
-    return filterInvalidMoves(potential_moves, loc, squares)
+    return filterInvalidMoves(potentialMoves, loc, squares)
 }
 
 const rookMoves = (loc: number, squares: (PieceData | null)[]): number[] => {
-    let potential_moves = []
+    let potentialMoves = []
     const operations = [
-        (n: number) => loc + n * 8,
-        (n: number) => loc + n * -8,
-        (n: number) => loc + n * 1,
-        (n: number) => loc + n * -1,
+        {op: (n: number) => loc + n * -8, boundCheck: (prev: number, m:number) => false},
+        {op: (n: number) => loc + n * 8, boundCheck: (prev: number, m:number) => false},
+        {op: (n: number) => loc + n * 1, boundCheck: horizontalOutBoundCheck},
+        {op: (n: number) => loc + n * -1, boundCheck: horizontalOutBoundCheck},
     ]
-    for (let op of operations) {
-        for (let i = 1; i < BOARD_SIZE; i++) {
-            potential_moves.push(op(i))
+    for (let {op, boundCheck} of operations) {
+        for (let i = 1, prev = loc; i < BOARD_SIZE; i++) {
+            if(boundCheck(prev, op(i))) break;
+            potentialMoves.push(op(i))
             if (squares[op(i)]) break
+            prev = op(i);
         }
     }
-    return filterInvalidMoves(potential_moves, loc, squares)
+    return filterInvalidMoves(potentialMoves, loc, squares)
 }
 
 const pawnAttackMoves = (loc: number, squares: (PieceData | null)[]): number[] => {
