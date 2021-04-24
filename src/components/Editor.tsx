@@ -20,7 +20,7 @@ const Editor =  () => {
                     let squareData : SquareData = {
                         piece,
                     }
-                    return <Square squareData={squareData}/>
+                    return <Square key={i} squareData={squareData}/>
                 })}
             </div>
             <div className="row">
@@ -28,7 +28,7 @@ const Editor =  () => {
                     let squareData : SquareData = {
                         piece,
                     }
-                    return <Square squareData={squareData}/>
+                    return <Square key={i} squareData={squareData}/>
                 })}
             </div>
         </div>

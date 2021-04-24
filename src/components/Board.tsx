@@ -69,6 +69,7 @@ const Board = ({squares, movePiece, editSquare, addPower, removePower}:{
                             }
                             return (
                                 <Square
+                                    key = {id}
                                     squareData = {squareData}
                                 />);
                         })}

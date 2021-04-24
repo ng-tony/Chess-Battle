@@ -8,7 +8,6 @@ const PowerUpEditor =  () => {
     for(const pupType in PowerUpType)
         powerUps.push({type: pupType} as PowerUpData)
     
-    console.log(powerUps)
     return <div className="powerup-editor">
         <div className="container">
             <div className="row">
@@ -16,7 +15,7 @@ const PowerUpEditor =  () => {
                     let squareData : SquareData = {
                         powerUp,
                     }
-                    return <Square squareData={squareData}/>
+                    return <Square key={i} squareData={squareData}/>
                 })}
             </div>
         </div>
