@@ -4,6 +4,7 @@ import VisibleBoard from './containers/VisibleBoard'
 import React from 'react';
 import Editor from "./components/Editor";
 import PowerUpEditor from "./components/PowerUpEditor"
+import UnReDoer from './containers/UnReDoer';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <PowerUpEditor />
         </div>
       </div>
+      <UnReDoer />
     </div>
   );
 }

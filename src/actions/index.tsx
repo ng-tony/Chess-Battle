@@ -23,3 +23,11 @@ export const removePowers = (loc: number) => ({
     type: 'REMOVE_POWERUPS',
     loc,
 })
+
+export const undo = () => ({
+    type: 'UNDO',
+})
+
+export const redo = () => ({
+    type: 'REDO',
+})

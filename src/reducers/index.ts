@@ -1,8 +1,9 @@
 import boardReducer from './board'
+import undoable from './undoable'
 import { combineReducers } from 'redux'
 
 const allReducers = combineReducers({
-    board: boardReducer,
+    board: undoable(boardReducer),
 })
 
 export default allReducers

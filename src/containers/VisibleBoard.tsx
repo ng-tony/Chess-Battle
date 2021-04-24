@@ -3,8 +3,14 @@ import { movePiece, editSquare, addPower, removePowers } from '../actions'
 import Board from '../components/Board'
 import PieceData, {PowerUpData} from '../GameLogic'
 
-const mapStateToProps = (state:{board:PieceData[]}) => ({
-  squares: state.board
+
+
+const mapStateToProps = (state:{board: {
+  past:PieceData[][]
+  present:PieceData[]
+  future:PieceData[][]
+}}) => ({
+  squares: state.board.present
 })
 
 const mapDispatchToProps = (dispatch:(action:any) => void)  => ({
