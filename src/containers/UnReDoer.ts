@@ -6,8 +6,6 @@ const UnReDoer = ({undoL, redoL}: {undoL: ()=>void, redoL:()=>void}) => {
 
     useEffect(() => {
         document.addEventListener("keydown", (event) => {
-            console.log(event.code);
-            console.log("wtf")
             switch (event.code){
                 case "ArrowLeft":
                     undoL();
