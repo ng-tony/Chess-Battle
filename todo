@@ -17,3 +17,37 @@ icon site name
 renaming the whole thing lol
 
 readme
+Bugs:
+    You can discover a check on yourself
+
+
+Features:
+    Mobile Support
+        Drag and drop dont work
+    Click and Drop
+        -
+    Highlight
+        Previous Move
+        Places you can go
+        Selected Piece
+    History Ui
+
+Smaller features:
+    Letters/numbers for coordinate on board
+    Drag into editor is delete
+    X icon for deleting a piece/powerup instead of a blank
+    Hide editors
+
+Longer term goals:
+    Multiplayer
+        url roomcode
+        player --websocket?--> server --websocket?--> other player
+        taking turns? or sandbox with like infinite joiners
+
+Fluff:
+    Timer?
+
+The art of programming:
+    Refactor GameLogic for better code reuse, and also shift things around
+        probably needs to be in more than one file too
+    
