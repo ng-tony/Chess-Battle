@@ -1,22 +1,3 @@
-~Layout
-Look N feel
-//Chess logic
-Promotion
-
-//undo redo
-~sounds
-
-guard piece priorty
-
-Blurb bit describing what is,
-    txt box on desktop
-    maybe mobile modal or something with icon for mobile duh
-
-icon site name
-
-renaming the whole thing lol
-
-readme
 Bugs:
     You can discover a check on yourself
 
@@ -31,12 +12,21 @@ Features:
         Places you can go
         Selected Piece
     History Ui
+        -
+    Description
+        in game, modal? with a ? icon
+    Piece promotions
 
 Smaller features:
     Letters/numbers for coordinate on board
     Drag into editor is delete
     X icon for deleting a piece/powerup instead of a blank
     Hide editors
+    Sounds
+        onCapture
+        onCheck
+        onPoweredup
+    Flip board
 
 Longer term goals:
     Multiplayer
@@ -46,6 +36,7 @@ Longer term goals:
 
 Fluff:
     Timer?
+    What should be guard priorities? Weakest piece? Knight before bishop?
 
 The art of programming:
     Refactor GameLogic for better code reuse, and also shift things around
