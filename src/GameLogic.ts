@@ -150,9 +150,9 @@ const kingMoves = (loc: number, squares: (PieceData | null)[]): number[] => {
         { relCoord: -9, expectedRowMovement: 1 },
         { relCoord: -8, expectedRowMovement: 1 },
         { relCoord: -7, expectedRowMovement: 1 },
-        { relCoord: -1, expectedRowMovement: 1 },
+        { relCoord: -1, expectedRowMovement: 0 },
         { relCoord: 1, expectedRowMovement: 0 },
-        { relCoord: 7, expectedRowMovement: 0 },
+        { relCoord: 7, expectedRowMovement: 1 },
         { relCoord: 8, expectedRowMovement: 1 },
         { relCoord: 9, expectedRowMovement: 1 },
     ]
@@ -308,7 +308,7 @@ const guardStrategy = (loc: number, squares: (PieceData | null)[], move: number)
     for (const [i, square] of squares.entries()) {
         if (!square || square!.color === squares[move]?.color) continue
         if(hasPowerUp(squares, i, PowerUpType.Guard) &&
-            getCaptureMoves(i, squares).includes(move)) {
+            getMoves(i, squares).includes(move)) {
             return moveSucessResults(i, move, squares)
         }
     }
