@@ -129,17 +129,16 @@ const bishopMoves = (loc: number, squares: (PieceData | null)[]): number[] => {
     let potentialMoves = []
     //Move in the four diagonal directions
     const operations = [
-        {op: (n: number) => loc + n * -9, boundCheck: diagonalOutBoundCheck},
-        {op: (n: number) => loc + n * 9, boundCheck: diagonalOutBoundCheck},
-        {op: (n: number) => loc + n * 7, boundCheck: diagonalOutBoundCheck},
-        {op: (n: number) => loc + n * -7, boundCheck: diagonalOutBoundCheck},
+        {op: (n: number) => loc + n * -9},
+        {op: (n: number) => loc + n * 9},
+        {op: (n: number) => loc + n * 7},
+        {op: (n: number) => loc + n * -7}
     ]
-    for (let {op, boundCheck} of operations) {
-        for (let i = 1, prev = loc; i < BOARD_SIZE; i++) {
-            if(boundCheck(prev,op(i))) break;
+    for (let {op} of operations) {
+        for (let i = 1; i < BOARD_SIZE; i++) {
+            if(moveWrappedRow(loc, op(i), i)) break;
             potentialMoves.push(op(i))
             if (squares[op(i)]) break
-            prev = loc
         }
     }
     return filterInvalidMoves(potentialMoves, loc, squares)
