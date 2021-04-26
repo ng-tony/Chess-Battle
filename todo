@@ -1,5 +1,8 @@
 Bugs:
-    You can discover a check on yourself
+    King with shield cannot be checked i guess
+
+Currently Unimplemented:
+    Castling, enpassant
 
 
 Features:
@@ -11,6 +14,7 @@ Features:
         Previous Move
         Places you can go
         Selected Piece
+            Might be used if allow >2 players on mp
     History Ui
         -
     Description
@@ -37,6 +41,7 @@ Longer term goals:
 Fluff:
     Timer?
     What should be guard priorities? Weakest piece? Knight before bishop?
+    Feature Request? // bug report?
 
 The art of programming:
     Refactor GameLogic for better code reuse, and also shift things around
