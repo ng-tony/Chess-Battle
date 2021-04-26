@@ -92,7 +92,7 @@ const _getMoves = (
         const newSquares = produce(squares, draft => {
             moveSucessResults(from, move, draft)
         });
-        if(shallowCheckCheck(squares[from]!.color, newSquares)) return false
+        if(checkCheck(squares[from]!.color, newSquares)) return false
         return true
     })
 }
@@ -123,7 +123,7 @@ export const validateMove = (
     const newSquares = produce(squares, draft => {
         moveSucessResults(from, to, draft)
     })
-    if (shallowCheckCheck(squares[from]!.color, newSquares)) return false;
+    if (checkCheck(squares[from]!.color, newSquares)) return false;
     const moves = moveStratData.map((moveStratData) => {
         return moveStratData.move
     });
@@ -169,7 +169,7 @@ const filterPotentialMoves = (
         return retv;
 }
 
-const shallowCheckCheck = (
+const checkCheck = (
     color: Color,
     squares: (PieceData | null)[]):boolean => {
         for (let [i, square] of squares.entries()){
@@ -178,7 +178,8 @@ const shallowCheckCheck = (
             moveStratData = expandRecurringMoves(i, moveStratData!, squares);
             moveStratData = filterPotentialMoves(i ,moveStratData, moveFilters, squares);
             const inCheck =  moveStratData.reduce((acc, curr) => {
-                return acc || squares[curr.move!]?.type === PieceType.King
+                return (acc || (squares[curr.move!]?.type === PieceType.King && 
+                        !hasPowerUp(squares[curr.move!], PowerUpType.Shield))) 
             }, false);
             if (inCheck) return true;
         } 
