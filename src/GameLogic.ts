@@ -82,7 +82,7 @@ const _getMoves = (
     squares: (PieceData | null)[],
     ):PieceMove[] => {
     //Check
-    if(squares[from] === null) return [];
+    if(!squares[from]) return [];
 
     let moveStratData = moveStrategies.get(squares[from]!.type)
     moveStratData = expandRecurringMoves(from, moveStratData!, squares);

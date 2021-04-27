@@ -31,3 +31,18 @@ export const undo = () => ({
 export const redo = () => ({
     type: 'REDO',
 })
+
+export const flipBoard = () => ({
+    type: 'FLIP_BOARD',
+})
+
+
+export const selectSquare = (selectedSquare: number) => ({
+    type: 'SELECT_SQUARE',
+    selectedSquare,
+})
+
+
+export const toggleEditor = () => ({
+    type: 'TOGGLE_EDITOR',
+})

@@ -1,8 +1,7 @@
 Bugs:
 
 Currently Unimplemented:
-    enpassant
-
+    Piece promotions
 
 Features:
     Mobile Support
@@ -18,7 +17,7 @@ Features:
         -
     Description
         in game, modal? with a ? icon
-    Piece promotions
+    
 
 Smaller features:
     Letters/numbers for coordinate on board
@@ -30,6 +29,7 @@ Smaller features:
         onCheck
         onPoweredup
     Flip board
+    Piece snapping
 
 Longer term goals:
     Multiplayer

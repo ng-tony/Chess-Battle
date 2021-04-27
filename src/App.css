@@ -15,6 +15,8 @@ body {
   --row-height:12.5%;
   --light-square-color: rgb(255, 240, 197);
   --dark-square-color: rgb(185, 161, 110);
+  --light-highlighted-color: rgb(234, 158, 134);
+  --dark-highlighted-color: rgb(204, 125, 89);
   --board-size: 60%;
 }
 
@@ -43,6 +45,10 @@ body {
   width: 100%;
 }
 
+.row .square.highlighted {
+  background-color: var(--dark-highlighted-color);
+}
+
 .square img {
   height: auto;
   width:100%;
@@ -65,6 +71,15 @@ body {
 .row:nth-child(even) .square:nth-child(2n) {
   background-color:var(--light-square-color);
 }
+
+.row:nth-child(odd) .square:nth-child(2n + 1).highlighted{
+  background-color:var(--light-highlighted-color);
+}
+.row:nth-child(even) .square:nth-child(2n).highlighted{
+  background-color:var(--light-highlighted-color);
+}
+
+
 
 .board {
   position: relative;
