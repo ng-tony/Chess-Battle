@@ -1,19 +1,48 @@
-~Layout
-Look N feel
-//Chess logic
-Promotion
+Bugs:
 
-//undo redo
-~sounds
+Currently Unimplemented:
+    enpassant
 
-guard piece priorty
 
-Blurb bit describing what is,
-    txt box on desktop
-    maybe mobile modal or something with icon for mobile duh
+Features:
+    Mobile Support
+        Drag and drop dont work
+    Click and Drop
+        -
+    Highlight
+        Previous Move
+        Places you can go
+        Selected Piece
+            Might be used if allow >2 players on mp
+    History Ui
+        -
+    Description
+        in game, modal? with a ? icon
+    Piece promotions
 
-icon site name
+Smaller features:
+    Letters/numbers for coordinate on board
+    Drag into editor is delete
+    X icon for deleting a piece/powerup instead of a blank
+    Hide editors
+    Sounds
+        onCapture
+        onCheck
+        onPoweredup
+    Flip board
 
-renaming the whole thing lol
+Longer term goals:
+    Multiplayer
+        url roomcode
+        player --websocket?--> server --websocket?--> other player
+        taking turns? or sandbox with like infinite joiners
 
-readme
+Fluff:
+    Timer?
+    What should be guard priorities? Weakest piece? Knight before bishop?
+    Feature Request? // bug report?
+
+The art of programming:
+    Refactor GameLogic for better code reuse, and also shift things around
+        probably needs to be in more than one file too
+    
