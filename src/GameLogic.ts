@@ -23,6 +23,7 @@ export default interface PieceData {
     haveMoved: boolean
     letters: string
     powerUps: PowerUpData[]
+    enpassantable: boolean
 }
 
 export enum PowerUpType {
@@ -44,6 +45,7 @@ export const decodePiece = (letters: string): PieceData => {
         haveMoved: false,
         letters,
         powerUps: [],
+        enpassantable: false,
     }
 }
 
@@ -238,7 +240,7 @@ const removePawnInvalidMove = (
         if(squares[from]?.type !== PieceType.Pawn){
             return moveStratData;
         }
-        return moveStratData.filter(({move, pawnCapture, rowChange}) => {
+        return moveStratData.filter(({addend, move, pawnCapture, rowChange}) => {
             let validMove = true;
             //Backward Movement
             if(squares[from]?.type === PieceType.Pawn) {
@@ -248,10 +250,13 @@ const removePawnInvalidMove = (
             //Valid Capture
             if(pawnCapture) {
                 validMove = validMove &&
-                    squares[move!]?.color !== squares[from]?.color &&
-                    squares[move!] !== null;
-            } else {
-                validMove = validMove && squares[move!] === null;
+                    //Regular capture
+                    ((squares[move!]?.color !== squares[from]?.color &&
+                    squares[move!] !== null) ||
+                    //Enpassant capture
+                    ((squares[move! - 8*(Math.abs(addend)/addend)]?.enpassantable as boolean) ||
+                     (squares[move! - 16*(Math.abs(addend)/addend)]?.enpassantable as boolean))
+                    )
             }
             //Valid Double Move
             if(rowChange === 2) {
@@ -366,6 +371,35 @@ const castlingStrategy = (loc: number, squares: (PieceData | null)[], move: numb
     return squares;
 }
 
+const handleEnpassantFlags = (loc: number, squares: (PieceData | null)[], move: number): (PieceData | null)[] => {
+    if(squares[move]?.type === PieceType.Pawn){
+
+    }
+    //Pawn has been captured enpassant
+    if(squares[move]?.type === PieceType.Pawn){
+        const relMove = move - loc;
+        //if capture has been made
+        if(Math.abs(relMove) === 7 || Math.abs(relMove) === 9){
+            //check if there is an enpassantable piece to destroy
+            const dir = relMove/Math.abs(relMove);
+            for(let i = 1; i < 3; i++){
+                if (squares[move - dir*8*i]?.enpassantable){
+                    squares[move - dir*8*i] = null;
+                }
+            }
+        }
+    }
+    //Clean enpassant flags
+    for(const square of squares){
+        if(square?.type === PieceType.Pawn) square.enpassantable = false;
+    }
+    //Pawn is made to be enpassantable
+    if(squares[move]?.type === PieceType.Pawn && Math.abs(move - loc) === 16){
+        squares[move]!.enpassantable = true;
+    }
+    return squares;
+}
+
 
 
 export const moveSucessResults = (
@@ -460,4 +494,5 @@ const moveSucessStrategies:(
         flailStrategy,
         guardStrategy,
         castlingStrategy,
+        handleEnpassantFlags,
     ];
