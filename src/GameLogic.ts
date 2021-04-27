@@ -257,6 +257,11 @@ const removePawnInvalidMove = (
                     ((squares[move! - 8*(Math.abs(addend)/addend)]?.enpassantable as boolean) ||
                      (squares[move! - 16*(Math.abs(addend)/addend)]?.enpassantable as boolean))
                     )
+            } else {
+                //Capturing without being a capture move
+                if(squares[move!]){
+                    validMove = false;
+                }
             }
             //Valid Double Move
             if(rowChange === 2) {
