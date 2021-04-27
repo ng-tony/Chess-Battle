@@ -1,6 +1,5 @@
 import produce, {original} from "immer"
 
-const debug = false;
 const BOARD_SIZE = 8
 
 export enum Color {
@@ -124,7 +123,7 @@ export const validateMove = (
     const newSquares = produce(squares, draft => {
         moveSucessResults(from, to, draft)
     })
-    // if (checkCheck(squares[from]!.color, newSquares)) return false;
+    if (checkCheck(squares[from]!.color, newSquares)) return false;
     const moves = moveStratData.map((moveStratData) => {
         return moveStratData.move
     });
