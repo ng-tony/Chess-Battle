@@ -10,23 +10,29 @@ export interface SquareData  {
     piece?: PieceData | null,
     powerUp?: PowerUpData,
     onDrop?: (ev: React.DragEvent) => void
+    onClick?: (ev: React.MouseEvent) => void
+    highlighted: boolean,
 }
 
 //prettier-ignore
 const Square = ({ squareData }: 
     {
      onDrop?: (ev: React.DragEvent) => void;
-     squareData: (SquareData) }) => (
+     squareData: (SquareData) }) => {
+         
+    const {id, piece, powerUp, onDrop, onClick, highlighted} = squareData;
 
-    <div className="square"
-        onDragOver={squareData.onDrop ? (ev) => ev.preventDefault() : undefined}
-        onDrop={squareData.onDrop}
+    return (
+    <div className={"square" + (highlighted ? " highlighted" : "")} 
+        onDragOver={onDrop ? (ev) => ev.preventDefault() : undefined}
+        onDrop={onDrop}
+        onMouseDown={onClick}
     >
-        {squareData.piece === null ? <div className="empty"></div> :
-         squareData.piece === undefined ? null :
-            <Piece piece={squareData.piece} pId={squareData.id} /> }
-        {squareData.powerUp ? <PowerUp powerUp = {squareData.powerUp} /> : null}
+        {piece === null ? <div className="empty"></div> :
+         piece === undefined ? null :
+            <Piece piece={piece} pId={id} /> }
+        {powerUp ? <PowerUp powerUp = {powerUp} /> : null}
     </div>
-)
+) as JSX.Element}
 
 export default Square

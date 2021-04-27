@@ -19,6 +19,8 @@ const Editor =  () => {
                 {whitePieces.map((piece, i) => {
                     let squareData : SquareData = {
                         piece,
+                        onClick: (e: React.MouseEvent) =>  {},
+                        highlighted: false,
                     }
                     return <Square key={i} squareData={squareData}/>
                 })}
@@ -27,6 +29,8 @@ const Editor =  () => {
                 {blackPieces.map((piece, i) => {
                     let squareData : SquareData = {
                         piece,
+                        onClick: (e: React.MouseEvent) =>  {},
+                        highlighted: false,
                     }
                     return <Square key={i} squareData={squareData}/>
                 })}

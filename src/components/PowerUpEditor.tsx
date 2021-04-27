@@ -14,6 +14,7 @@ const PowerUpEditor =  () => {
                 {powerUps.map((powerUp, i) => {
                     let squareData : SquareData = {
                         powerUp,
+                        highlighted: false,
                     }
                     return <Square key={i} squareData={squareData}/>
                 })}
