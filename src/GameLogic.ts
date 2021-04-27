@@ -1,4 +1,4 @@
-import produce from "immer"
+import produce, {original} from "immer"
 
 const debug = false;
 const BOARD_SIZE = 8
@@ -73,6 +73,7 @@ interface PieceMove {
     recurring: number,
     pawnCapture?: boolean,
     move?: number,
+    castling?: boolean,
 }
 
 const _getMoves = (
@@ -123,7 +124,7 @@ export const validateMove = (
     const newSquares = produce(squares, draft => {
         moveSucessResults(from, to, draft)
     })
-    if (checkCheck(squares[from]!.color, newSquares)) return false;
+    // if (checkCheck(squares[from]!.color, newSquares)) return false;
     const moves = moveStratData.map((moveStratData) => {
         return moveStratData.move
     });
@@ -143,6 +144,7 @@ const expandRecurringMoves = (
                 recurring: 1,
                 pawnCapture: moveData.pawnCapture,
                 move: moveData.addend*i + from,
+                castling: moveData.castling,
             })
             //If move direction is now blocked
             if (squares[moveData.addend*i + from] !== null)
@@ -190,7 +192,6 @@ const removeSameColors = (
     from: number, 
     moveStratData:PieceMove[], 
     squares:(PieceData | null)[]):PieceMove[] =>{
-        if (debug) console.log("same color");
         const color = squares[from]?.color;
         return moveStratData.filter(({move}) => {
             return (move && squares[move]?.color === color) ? 
@@ -202,7 +203,6 @@ const removeOutOfBounds = (
     from: number, 
     moveStratData:PieceMove[], 
     squares:(PieceData | null)[]):PieceMove[] =>{
-        if (debug) console.log("oob");
         return moveStratData.filter(({move}) => {
             return !(move! > 63 || move! < 0) 
         })
@@ -218,7 +218,6 @@ const removeRowWrappedMove = (
     from: number, 
     moveStratData:PieceMove[], 
     squares:(PieceData | null)[]):PieceMove[] =>{
-        if (debug) console.log("warpped");
         return moveStratData.filter(({move, rowChange}) => {
             return !hasRowWrapped(from, move!, rowChange)
         })
@@ -228,7 +227,6 @@ const removeShieldedSquares = (
     from: number, 
     moveStratData:PieceMove[], 
     squares:(PieceData | null)[]):PieceMove[] =>{
-        if (debug) console.log("shieled");
         return moveStratData.filter(({move}) => {
             return !hasPowerUp(squares[move!], PowerUpType.Shield);
         })
@@ -242,7 +240,6 @@ const removePawnInvalidMove = (
             return moveStratData;
         }
         return moveStratData.filter(({move, pawnCapture, rowChange}) => {
-            if (debug) console.log("pawns");
             let validMove = true;
             //Backward Movement
             if(squares[from]?.type === PieceType.Pawn) {
@@ -260,6 +257,37 @@ const removePawnInvalidMove = (
             //Valid Double Move
             if(rowChange === 2) {
                 validMove = validMove && squares[from]?.haveMoved === false;
+            }
+            return validMove;
+        })
+}
+
+const removeInvalidCastles = (
+    from: number, 
+    moveStratData:PieceMove[],
+    squares:(PieceData | null)[]):PieceMove[] => {
+        if(squares[from]?.type !== PieceType.King){
+            return moveStratData;
+        }
+        return moveStratData.filter(({addend, move, castling}) => {
+            let validMove = true;
+            if(castling){
+                if(!squares[from]?.haveMoved){
+                    
+                    let dir = Math.abs(addend)/addend;
+                    for (let i = 1; i < 5; i++){
+                        const checkedSq = from + i*dir;
+                        if(squares[checkedSq] === null) continue
+                        if (!(squares[checkedSq]?.type === PieceType.Rook &&
+                              squares[checkedSq]?.color === squares[from]?.color &&
+                              !squares[checkedSq]?.haveMoved)){
+                              validMove = false;
+                        }
+                        break;
+                    }
+                } else {
+                    validMove = false;
+                }
             }
             return validMove;
         })
@@ -325,12 +353,21 @@ const flailStrategy = (loc: number, squares: (PieceData | null)[], move: number)
     return squares;
 }
 
-export const moveSucessStrategies:(
-    (loc:number, squares: (PieceData | null)[], move:number) => (PieceData | null)[])[] = [
-        swordStrategy,
-        flailStrategy,
-        guardStrategy,
-    ];
+const castlingStrategy = (loc: number, squares: (PieceData | null)[], move: number): (PieceData | null)[] => {
+    if(squares[move]?.type === PieceType.King && Math.abs(move - loc) === 2){
+        const dir = Math.abs(move - loc)/(move - loc);
+        const orig = original(squares);
+        let i;
+        for (i = 1; i < 4; i++){
+            if(orig![move + dir*i] !== null) break;
+        }
+        squares[move - dir] = squares[move + dir*i];
+        squares[move + dir*i] = null;
+    }
+    return squares;
+}
+
+
 
 export const moveSucessResults = (
     from: number,
@@ -364,6 +401,8 @@ const moveStrategies = new Map<PieceType, PieceMove[]>([
         {addend: + 7, rowChange: 1, recurring: 1},
         {addend: + 8, rowChange: 1, recurring: 1},
         {addend: + 9, rowChange: 1, recurring: 1},
+        {addend: - 2, rowChange: 0, recurring: 1, castling: true},
+        {addend: + 2, rowChange: 0, recurring: 1, castling: true},
     ]],
     [PieceType.Knight, [
         {addend: + 10, rowChange: 1, recurring: 1},
@@ -410,4 +449,16 @@ const moveFilters = [
     removeSameColors,
     removeShieldedSquares,
     removePawnInvalidMove,
+    removeInvalidCastles,
 ]
+
+const moveSucessStrategies:(
+        (loc:number, 
+         squares: (PieceData | null)[], 
+         move:number) => (PieceData | null)[]
+    )[] = [
+        swordStrategy,
+        flailStrategy,
+        guardStrategy,
+        castlingStrategy,
+    ];
