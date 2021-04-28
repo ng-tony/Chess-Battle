@@ -76,16 +76,16 @@ body {
   background-color:var(--light-square-color);
 }
 
+.row:nth-child(odd) .square:nth-child(2n + 1).lastMove,
+.row:nth-child(even) .square:nth-child(2n).lastMove{
+  background-color:var(--light-highlighted-yellow-color);
+}
 
 .row:nth-child(odd) .square:nth-child(2n + 1).highlighted,
 .row:nth-child(even) .square:nth-child(2n).highlighted{
   background-color:var(--light-highlighted-red-color);
 }
 
-.row:nth-child(odd) .square:nth-child(2n + 1).lastMove,
-.row:nth-child(even) .square:nth-child(2n).lastMove{
-  background-color:var(--light-highlighted-yellow-color);
-}
 
 
 .board {

@@ -16,6 +16,7 @@ const PowerUpEditor =  () => {
                         powerUp,
                         highlighted: false,
                         lastMove: false,
+                        selected: false,
                     }
                     return <Square key={i} squareData={squareData}/>
                 })}

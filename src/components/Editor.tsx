@@ -22,6 +22,7 @@ const Editor =  () => {
                         onClick: (e: React.MouseEvent) =>  {},
                         highlighted: false,
                         lastMove: false,
+                        selected: false,
                     }
                     return <Square key={i} squareData={squareData}/>
                 })}
@@ -33,6 +34,7 @@ const Editor =  () => {
                         onClick: (e: React.MouseEvent) =>  {},
                         highlighted: false,
                         lastMove: false,
+                        selected: false,
                     }
                     return <Square key={i} squareData={squareData}/>
                 })}

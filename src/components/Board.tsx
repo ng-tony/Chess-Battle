@@ -90,6 +90,7 @@ const Board = ({squares, selectedSquare, lastMove, movePiece, editSquare, addPow
                                 onClick: squareClick(id),
                                 highlighted:squaresToBeHighlighted.includes(id),
                                 lastMove: (lastMove.from === id) || (lastMove.to === id),
+                                selected: selectedSquare === id,
                             }
                             return (
                                 <Square
