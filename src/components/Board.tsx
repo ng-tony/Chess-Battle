@@ -58,7 +58,12 @@ const Board = ({squares, selectedSquare, movePiece, editSquare, addPower, remove
 
     const squareClick = (id: number) => {
         return (e: React.MouseEvent) => {
-            selectSquare(id);
+            if(validateMove(selectedSquare, id, squares)) {
+                movePiece(selectedSquare, id);
+                moveAudio.play()
+            } else {
+                selectSquare(id);
+            }
         }
     }
     
