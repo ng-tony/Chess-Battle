@@ -8,7 +8,6 @@ const VisualPiece = ({piece, selected, pId}: {
     selected: boolean,
     pId?:number
 }) => {
-    let dragged = false;
     const pieceDrag = (ev:React.DragEvent) => {
         let dropInfo: DropInfo;
         if (pId as number >= 0) {

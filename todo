@@ -9,11 +9,6 @@ Currently Unimplemented:
 Features:
     Mobile Support
         Drag and drop dont work
-    Highlight
-        Previous Move
-        Places you can go
-        Selected Piece
-            Might be used if allow >2 players on mp
     History Ui
         -
     Description
@@ -31,6 +26,7 @@ Smaller features:
         onPoweredup
     Flip board
     Piece snapping
+    Piece becomes translucent when it got picked up
 
 Longer term goals:
     Multiplayer

@@ -74,33 +74,53 @@ const Board = ({squares, selectedSquare, lastMove, movePiece, editSquare, addPow
     }
     
     const squaresToBeHighlighted = getMoves(selectedSquare, squares);
-    console.log("sqth", squaresToBeHighlighted);
+
     return (
         <div className="board">
             <div className="container">
-            {Array(8).fill(null).map((_, i) => {
-                return (
-                    <div className="row" key={i}>
-                        {squares.slice(i*8, i*8 + 8).map((square, j) => {
-                            const id = i*8 + j;
-                            let squareData: SquareData = {
-                                id,
-                                onDrop: squareDrop(id),
-                                piece: squares[id] ? squares[id]: null,
-                                onClick: squareClick(id),
-                                highlighted:squaresToBeHighlighted.includes(id),
-                                lastMove: (lastMove.from === id) || (lastMove.to === id),
-                                selected: selectedSquare === id,
-                            }
-                            return (
-                                <Square
-                                    key = {id}
-                                    squareData = {squareData}
-                                />);
-                        })}
-                    </div>
-                    )
-            })}
+                {Array(8).fill(null).map((_, i) => {
+                    return (
+                        <div className="row" key={i}>
+                            {squares.slice(i*8, i*8 + 8).map((square, j) => {
+                                const id = i*8 + j;
+                                let squareData: SquareData = {
+                                    id,
+                                    onDrop: squareDrop(id),
+                                    piece: squares[id] ? squares[id]: null,
+                                    onClick: squareClick(id),
+                                    highlighted:squaresToBeHighlighted.includes(id),
+                                    lastMove: (lastMove.from === id) || (lastMove.to === id),
+                                    selected: selectedSquare === id,
+                                }
+                                return (
+                                    <Square
+                                        key = {id}
+                                        squareData = {squareData}
+                                    />);
+                            })}
+                        </div>
+                        )
+                })}
+                <div className="ruler file">
+                    <div className="rule">h</div>
+                    <div className="rule">g</div>
+                    <div className="rule">f</div>
+                    <div className="rule">e</div>
+                    <div className="rule">d</div>
+                    <div className="rule">c</div>
+                    <div className="rule">b</div>
+                    <div className="rule">a</div>
+                </div>
+                <div className="ruler rank">
+                    <div className="rule"><p>1</p></div>
+                    <div className="rule"><p>2</p></div>
+                    <div className="rule"><p>3</p></div>
+                    <div className="rule"><p>4</p></div>
+                    <div className="rule"><p>5</p></div>
+                    <div className="rule"><p>6</p></div>
+                    <div className="rule"><p>7</p></div>
+                    <div className="rule"><p>8</p></div>
+                </div>
             </div>
         </div>
     );
