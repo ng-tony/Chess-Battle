@@ -3,8 +3,9 @@ import PieceData from '../GameLogic'
 import { DropInfo, DropInfoType } from './Board'
 import React from 'react';
 
-const VisualPiece = ({piece, pId}: {
+const VisualPiece = ({piece, selected, pId}: {
     piece:PieceData,
+    selected: boolean,
     pId?:number
 }) => {
     const pieceDrag = (ev:React.DragEvent) => {
@@ -34,6 +35,7 @@ const VisualPiece = ({piece, pId}: {
                 id={pId !== undefined ? pId.toString() : "null"}
                 style={{
                     backgroundImage: layeredImages,
+                   // opacity: selected ? "70%" : "100%",
                 }
                 }
             ></div>
