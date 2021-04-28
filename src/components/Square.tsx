@@ -12,6 +12,7 @@ export interface SquareData  {
     onDrop?: (ev: React.DragEvent) => void
     onClick?: (ev: React.MouseEvent) => void
     highlighted: boolean,
+    lastMove: boolean,
 }
 
 //prettier-ignore
@@ -20,10 +21,10 @@ const Square = ({ squareData }:
      onDrop?: (ev: React.DragEvent) => void;
      squareData: (SquareData) }) => {
          
-    const {id, piece, powerUp, onDrop, onClick, highlighted} = squareData;
+    const {id, piece, powerUp, onDrop, onClick, highlighted, lastMove} = squareData;
 
     return (
-    <div className={"square" + (highlighted ? " highlighted" : "")} 
+    <div className={"square" + (highlighted ? " highlighted" : "") + (lastMove ? " lastMove" : "")} 
         onDragOver={onDrop ? (ev) => ev.preventDefault() : undefined}
         onDrop={onDrop}
         onMouseDown={onClick}

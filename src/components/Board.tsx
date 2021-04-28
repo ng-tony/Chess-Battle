@@ -21,25 +21,34 @@ export interface DropInfo {
 const moveAudio = new Audio(sounds.move.default);
 // const captureAudio = new Audio(sounds.capture);
 
-const Board = ({squares, selectedSquare, movePiece, editSquare, addPower, removePower, selectSquare}:{
+
+
+const Board = ({squares, selectedSquare, lastMove, movePiece, editSquare, addPower, removePower, selectSquare}:{
         squares:(PieceData | null)[],
         selectedSquare:number,
+        lastMove: {from:number, to:number},
         movePiece:(from: number, to: number) => void,
         editSquare:(loc:number, piece: PieceData) => void,
         addPower:(loc:number, powerUp: PowerUpData) => void,
         removePower:(loc:number) => void,
         selectSquare:(loc:number) => void,
     }) => {
+
+    const makeMove = (from: number, to: number):boolean => {
+        if(validateMove(from, to, squares)) {
+            movePiece(from, to);
+            moveAudio.play()
+            return true;
+        }
+        return false;
+    }
     const squareDrop = (id: number) => {
         return (ev: React.DragEvent) => {
             ev.preventDefault();
             let dropInfo = JSON.parse(ev.dataTransfer.getData("dropInfo")) as DropInfo;
             switch (dropInfo.type) {
                 case DropInfoType.move:
-                    if(validateMove(dropInfo.id!, id, squares)) {
-                        movePiece(dropInfo.id!, id);
-                        moveAudio.play()
-                    }
+                    makeMove(dropInfo.id!, id)
                     break;
                 case DropInfoType.editSquare:
                     editSquare(id, decodePiece(dropInfo.letters!));
@@ -58,10 +67,7 @@ const Board = ({squares, selectedSquare, movePiece, editSquare, addPower, remove
 
     const squareClick = (id: number) => {
         return (e: React.MouseEvent) => {
-            if(validateMove(selectedSquare, id, squares)) {
-                movePiece(selectedSquare, id);
-                moveAudio.play()
-            } else {
+            if(!makeMove(selectedSquare, id)) {
                 selectSquare(id);
             }
         }
@@ -83,6 +89,7 @@ const Board = ({squares, selectedSquare, movePiece, editSquare, addPower, remove
                                 piece: squares[id] ? squares[id]: null,
                                 onClick: squareClick(id),
                                 highlighted:squaresToBeHighlighted.includes(id),
+                                lastMove: (lastMove.from === id) || (lastMove.to === id),
                             }
                             return (
                                 <Square

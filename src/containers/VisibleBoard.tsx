@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { movePiece, editSquare, addPower, removePowers, selectSquare } from '../actions'
 import Board from '../components/Board'
 import PieceData, {PowerUpData} from '../GameLogic'
+import { gameInfo } from '../reducers/gameInfo'
 
 
 
@@ -9,14 +10,12 @@ const mapStateToProps = (state:{board: {
   past:PieceData[][]
   present:PieceData[]
   future:PieceData[][]
-}, gameInfo: {
-  selectedSquare: number,
-  flippedBoard: boolean,
-  hideEditor: boolean,
-}}) => {
+}, gameInfo: gameInfo
+}) => {
   return {
     squares: state.board.present,
-    selectedSquare: state.gameInfo.selectedSquare, 
+    selectedSquare: state.gameInfo.selectedSquare,
+    lastMove: state.gameInfo.lastMove,
   }
 }
 

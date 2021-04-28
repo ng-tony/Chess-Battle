@@ -15,8 +15,10 @@ body {
   --row-height:12.5%;
   --light-square-color: rgb(255, 240, 197);
   --dark-square-color: rgb(185, 161, 110);
-  --light-highlighted-color: rgb(234, 158, 134);
-  --dark-highlighted-color: rgb(204, 125, 89);
+  --light-highlighted-red-color: rgb(234, 158, 134);
+  --dark-highlighted-red-color: rgb(204, 125, 89);
+  --light-highlighted-yellow-color: rgb(253, 234, 148);
+  --dark-highlighted-yellow-color: rgb(184, 157, 83);
   --board-size: 60%;
 }
 
@@ -46,7 +48,11 @@ body {
 }
 
 .row .square.highlighted {
-  background-color: var(--dark-highlighted-color);
+  background-color: var(--dark-highlighted-red-color);
+}
+
+.row .square.lastMove {
+  background-color: var(--dark-highlighted-yellow-color);
 }
 
 .square img {
@@ -65,20 +71,21 @@ body {
   background-image: url("../src/assets/img/1x1.png");
 }
 
-.row:nth-child(odd) .square:nth-child(2n + 1){
-  background-color:var(--light-square-color);
-}
-.row:nth-child(even) .square:nth-child(2n) {
+.row:nth-child(odd) .square:nth-child(2n + 1),
+.row:nth-child(even) .square:nth-child(2n){
   background-color:var(--light-square-color);
 }
 
-.row:nth-child(odd) .square:nth-child(2n + 1).highlighted{
-  background-color:var(--light-highlighted-color);
-}
+
+.row:nth-child(odd) .square:nth-child(2n + 1).highlighted,
 .row:nth-child(even) .square:nth-child(2n).highlighted{
-  background-color:var(--light-highlighted-color);
+  background-color:var(--light-highlighted-red-color);
 }
 
+.row:nth-child(odd) .square:nth-child(2n + 1).lastMove,
+.row:nth-child(even) .square:nth-child(2n).lastMove{
+  background-color:var(--light-highlighted-yellow-color);
+}
 
 
 .board {
