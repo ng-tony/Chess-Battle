@@ -1,3 +1,4 @@
+import './Piece.css'
 import {pieceImages, PieceImageKey, powerUpImages, PowerUpImageKey} from '../assets/img/index'
 import PieceData from '../GameLogic'
 import { DropInfo, DropInfoType } from './Board'

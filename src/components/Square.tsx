@@ -1,3 +1,4 @@
+import "./Square.css"
 import PieceData, { PowerUpData } from '../GameLogic'
 import React from 'react'
 import Piece from './Piece'
@@ -25,7 +26,7 @@ const Square = ({ squareData }:
     const {id, piece, powerUp, onDrop, onClick, highlighted, lastMove, selected} = squareData;
 
     return (
-    <div className={"square" + (highlighted || selected ? " highlighted" : (lastMove ? " lastMove" : ""))} 
+    <div className={"square" + (highlighted || (selected && piece) ? " highlighted" : (lastMove ? " lastMove" : ""))} 
         onDragOver={onDrop ? (ev) => ev.preventDefault() : undefined}
         onDrop={onDrop}
         onMouseDown={onClick}

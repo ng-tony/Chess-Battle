@@ -1,0 +1,20 @@
+.about {
+    background-color: rgb(66, 66, 66);
+    display: inline-block;
+    border:0.2em solid rgb(31, 31, 31);
+    border-radius: 10%;
+    transition: all 0.2s;
+    height: fit-content;
+}
+.about:hover{
+    background-color:rgb(110, 110, 110);
+}
+
+.button-img{
+    height: 4em;
+    width: 4em;
+    margin: 0.2em;
+    background-image: url("../assets/img/question.svg");
+    background-size: cover;
+    opacity: 65%;
+}

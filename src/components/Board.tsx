@@ -1,3 +1,4 @@
+import './Board.css'
 import React from 'react'
 import PieceData, { decodePiece, getMoves, PowerUpData } from '../GameLogic'
 import Square, {SquareData} from './Square'
