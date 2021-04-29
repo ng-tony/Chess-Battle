@@ -1,6 +1,6 @@
-import {powerUpImages, PowerUpImageKey} from '../assets/img/index'
-import {PowerUpData} from '../GameLogic'
-import { DropInfoType } from './Board'
+import {powerUpImages, PowerUpImageKey} from '../../assets/img/index'
+import {PowerUpData} from '../../GameLogic'
+import { DropInfoType } from '../Board'
 import React from 'react';
 
 

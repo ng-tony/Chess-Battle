@@ -1,7 +1,7 @@
-import './Board.css'
+import './Board.scss'
 import React from 'react'
 import PieceData, { decodePiece, getMoves, PowerUpData } from '../GameLogic'
-import Square, {SquareData} from './Square'
+import Square, {SquareData} from './BuildingBlocks/Square'
 import {sounds} from '../assets/sounds/index'
 
 import {validateMove, PowerUpType} from '../GameLogic'
@@ -21,19 +21,26 @@ export interface DropInfo {
 
 const moveAudio = new Audio(sounds.move.default);
 // const captureAudio = new Audio(sounds.capture);
+export type BoardProps = {
+    squares:(PieceData | null)[],
+    selectedSquare:number,
+    lastMove: {from:number, to:number},
+    movePiece:(from: number, to: number) => void,
+    editSquare:(loc:number, piece: PieceData) => void,
+    addPower:(loc:number, powerUp: PowerUpData) => void,
+    removePower:(loc:number) => void,
+    selectSquare:(loc:number) => void,
+}
 
-
-
-const Board = ({squares, selectedSquare, lastMove, movePiece, editSquare, addPower, removePower, selectSquare}:{
-        squares:(PieceData | null)[],
-        selectedSquare:number,
-        lastMove: {from:number, to:number},
-        movePiece:(from: number, to: number) => void,
-        editSquare:(loc:number, piece: PieceData) => void,
-        addPower:(loc:number, powerUp: PowerUpData) => void,
-        removePower:(loc:number) => void,
-        selectSquare:(loc:number) => void,
-    }) => {
+const Board:React.FC<BoardProps> = ({
+    squares,
+    selectedSquare,
+    lastMove,
+    movePiece,
+    editSquare,
+    addPower,
+    removePower,
+    selectSquare}) => {
 
     const makeMove = (from: number, to: number):boolean => {
         if(validateMove(from, to, squares)) {

@@ -1,5 +1,5 @@
-import React from "react";
-import Square, {SquareData} from "./Square";
+import './PowerUpEditor.scss'
+import Square, {SquareData} from "./BuildingBlocks/Square";
 import {PowerUpType, PowerUpData} from "../GameLogic"
 
 const PowerUpEditor =  () => {

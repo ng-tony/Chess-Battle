@@ -1,5 +1,5 @@
-import "./Square.css"
-import PieceData, { PowerUpData } from '../GameLogic'
+import "./Square.scss"
+import PieceData, { PowerUpData } from '../../GameLogic'
 import React from 'react'
 import Piece from './Piece'
 import PowerUp from './PowerUp'

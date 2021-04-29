@@ -1,0 +1,73 @@
+.button-bar {
+    justify-content: right;
+    height: 2em;
+}
+
+.btn {
+    background-color: rgb(54, 54, 54);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+    flex-grow:1;
+    margin: 0em 0.2em;
+    border-radius: 5%;
+    border: transparent;
+}
+
+.btn:hover{
+    background-color:rgb(110, 110, 110);
+}
+
+.about {
+    flex-grow: 2;
+    .btn-img {
+        background-image: url("/assets/img/question.svg");
+    }
+}
+
+
+.undo {
+    flex-grow: 5;
+    .btn-img {
+        background-image: url("/assets/img/undo.svg");
+    }
+}
+
+.redo {
+    flex-grow: 5;
+    .btn-img {
+        background-image: url("/assets/img/undo.svg");
+        transform: rotate(180deg);
+    }
+}
+
+.btn-img{
+    width:1.5em;
+    height: 1.5em;
+    background-size: cover;
+    opacity: 65%;
+    filter: invert(100%)  brightness(95%);
+}
+
+@media (min-aspect-ratio: 6/5) {
+    .button-bar {
+        height: 4em;
+    }
+
+    .btn {
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.2s;
+        flex-grow:1;
+        margin: 0em 0.2em;
+        border-radius: 5%;
+    }
+
+    .btn-img{
+        width: 2.5em;
+        height: 2.5em;
+    }
+}

@@ -1,34 +1,31 @@
-
-import './App.css';
+import './App.scss'
 import VisibleBoard from './containers/VisibleBoard'
-import React from 'react';
-import Editor from "./components/Editor";
-import PowerUpEditor from "./components/PowerUpEditor"
-import UnReDoer from './containers/UnReDoer';
-import About from './components/About';
+import Editor from './components/Editor'
+import PowerUpEditor from './components/PowerUpEditor'
+import UnReDoer from './containers/UnReDoer'
+import ButtonBar from './components/ButtonBar'
+import History from './components/History'
 
 function App() {
-  return (
-    <div className="App">
-      <div className="container">
-        <VisibleBoard />
-        <div className="right">
-          <div className="section buttons">
-            <About />
-          </div>
-          <div className="section">
-            <Editor />
-          </div>
-          <div className="section">
-            <PowerUpEditor />
-          </div>
+    return (
+        <div className="App">
+            <div className="container">
+                <div className="left">
+                    <VisibleBoard />
+                    <ButtonBar />
+                </div>
+
+                <div className="tools right">
+                    <div className="editors">
+                        <Editor />
+                        <PowerUpEditor />
+                    </div>
+                    <History />
+                </div>
+                <UnReDoer />
+            </div>
         </div>
-        
-      </div>
-      <UnReDoer />
-      
-    </div>
-  );
+    )
 }
 
-export default App;
+export default App

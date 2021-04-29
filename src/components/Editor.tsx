@@ -1,5 +1,6 @@
+import './Editor.scss'
 import React from "react";
-import Square, {SquareData} from "./Square";
+import Square, {SquareData} from "./BuildingBlocks/Square";
 import {decodePiece} from '../GameLogic'
 
 const Editor =  () => {
