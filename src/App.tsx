@@ -5,6 +5,7 @@ import PowerUpEditor from './components/PowerUpEditor'
 import UnReDoer from './containers/UnReDoer'
 import ButtonBar from './components/ButtonBar'
 import History from './components/History'
+import SoundMaker from './containers/SoundMaker'
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                     <History />
                 </div>
                 <UnReDoer />
+                <SoundMaker />
             </div>
         </div>
     )

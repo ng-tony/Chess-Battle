@@ -1,7 +1,9 @@
 Bugs:
     Clear select when undo/redo
+
 Next Thing:
-    Clicks move pieces
+    Click to move for editor
+    Add sounds to undo redo
 
 Currently Unimplemented:
     Piece promotions
@@ -11,8 +13,7 @@ Features:
         Drag and drop dont work
     History Ui
         -
-    Description
-        in game, modal? with a ? icon
+    Top bar..?
     
 
 Smaller features:

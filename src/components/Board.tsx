@@ -2,7 +2,6 @@ import './Board.scss'
 import React from 'react'
 import PieceData, { decodePiece, getMoves, PowerUpData } from '../GameLogic'
 import Square, {SquareData} from './BuildingBlocks/Square'
-import {sounds} from '../assets/sounds/index'
 
 import {validateMove, PowerUpType} from '../GameLogic'
 
@@ -19,8 +18,7 @@ export interface DropInfo {
     powerUp?: PowerUpData,
 }
 
-const moveAudio = new Audio(sounds.move.default);
-// const captureAudio = new Audio(sounds.capture);
+
 export type BoardProps = {
     squares:(PieceData | null)[],
     selectedSquare:number,
@@ -45,7 +43,6 @@ const Board:React.FC<BoardProps> = ({
     const makeMove = (from: number, to: number):boolean => {
         if(validateMove(from, to, squares)) {
             movePiece(from, to);
-            moveAudio.play()
             return true;
         }
         return false;
@@ -60,7 +57,6 @@ const Board:React.FC<BoardProps> = ({
                     break;
                 case DropInfoType.editSquare:
                     editSquare(id, decodePiece(dropInfo.letters!));
-                    moveAudio.play()
                     break;
                 case DropInfoType.addPowerUp:
                     if (dropInfo.powerUp)

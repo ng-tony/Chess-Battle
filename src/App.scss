@@ -1,5 +1,4 @@
 .App {
-  padding: 0em;
   margin:auto;
 }
 
@@ -24,13 +23,14 @@
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+    padding: 0 0 1em 0;
     .editor {
       width: 80%;
-      margin: 0.5em 0em;
+      // margin: 0 0 2em 0;
     }
     .powerup-editor {
       width: 55%;
-      margin: 0.5em 0em;
+      margin: 0;
     }
   }
 }
@@ -46,6 +46,10 @@
       flex-direction: row nowrap;
     }
   }
+  .board {
+    margin: 1em 0em 1.5em 0em;
+  }
+
   .left {
     flex-grow: 3;
     width:auto;

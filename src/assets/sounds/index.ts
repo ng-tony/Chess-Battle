@@ -1,6 +1,6 @@
 
 const move = require('./move.wav')
-const capture =  require('./capture.mp3')
+const capture =  require('./capture.wav')
 
 
 export const sounds = { move, capture}
