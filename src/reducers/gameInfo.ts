@@ -5,6 +5,7 @@ export interface gameInfo {
     lastMove: {from:number, to:number},
     flippedBoard: boolean,
     hideEditor: boolean,
+    about: boolean,
 }
 
 const defaultState = {
@@ -12,6 +13,7 @@ const defaultState = {
     flippedBoard: false,
     hideEditor: false,
     squaresSelected: [],
+    about: false,
     lastMove: {from: -1, to: -1}
 } as gameInfo
 const gameInfoReducer = (state = defaultState, action: any) => {
@@ -24,10 +26,13 @@ const gameInfoReducer = (state = defaultState, action: any) => {
                 draftState.selectedSquare = action.selectedSquare;
                 break;
             case 'TOGGLE_EDITOR':
-                draftState.hideEditor = ! draftState.hideEditor;
+                draftState.hideEditor = !draftState.hideEditor;
                 break;
             case 'MOVE_PIECE':
                 draftState.lastMove = {from:action.from, to:action.to,}
+                break;
+            case 'TOGGLE_ABOUT':
+                draftState.about = !draftState.about;
                 break;
             default:
                 return

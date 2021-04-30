@@ -46,3 +46,7 @@ export const selectSquare = (selectedSquare: number) => ({
 export const toggleEditor = () => ({
     type: 'TOGGLE_EDITOR',
 })
+
+export const toggleAbout = () => ({
+    type: 'TOGGLE_ABOUT',
+})

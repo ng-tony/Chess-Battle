@@ -22,3 +22,18 @@ body {
   --board-size: 60%;
   --light-text-color: rgb(200, 200, 200);
 }
+
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap');
+
+h1, h2, h3, h4 {
+  font-family: Roboto, sans-serfic;
+}
+
+h2 {
+  font-size: 170%;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+}

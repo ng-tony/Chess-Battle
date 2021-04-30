@@ -18,7 +18,6 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(allReducer, composeEnhancers());
 
 ReactDOM.render(
-  
     <React.StrictMode>
       <Provider store={store}>
         <App />

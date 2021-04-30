@@ -4,8 +4,6 @@ import Board from '../components/Board'
 import PieceData, {PowerUpData} from '../GameLogic'
 import { gameInfo } from '../reducers/gameInfo'
 
-
-
 const mapStateToProps = (state:{board: {
   past:PieceData[][]
   present:PieceData[]
@@ -31,5 +29,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Board)
-
-connect()
