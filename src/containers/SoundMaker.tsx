@@ -9,9 +9,9 @@ type SoundMakerProps = {
 
 
 const moveAudio = new Audio(sounds.move.default);
-const powerUpAudio = new Audio(sounds.move.default);
+const powerUpAudio = new Audio(sounds.power.default);
 const captureAudio = new Audio(sounds.capture.default);
-const addedPieceAudio = new Audio(sounds.capture.default);
+const addedPieceAudio = new Audio(sounds.add.default);
 
 const SoundMaker: React.FC<SoundMakerProps> = ({squares}) => {
     const prevSquaresRef = useRef<(PieceData | null)[]>([]);
@@ -27,11 +27,8 @@ const SoundMaker: React.FC<SoundMakerProps> = ({squares}) => {
         return acc;
     }, 0)
 
-    if (prevNumEmptySquares < numEmptySquares) {
-        captureAudio.play();
-    } else if (prevNumEmptySquares > numEmptySquares){
-        addedPieceAudio.play();
-    }
+    const capture = prevNumEmptySquares < numEmptySquares;
+    const pieceAdded = prevNumEmptySquares > numEmptySquares;
 
     let pieceMoved = false; 
     for (let [i, square] of squares.entries()){
@@ -42,10 +39,16 @@ const SoundMaker: React.FC<SoundMakerProps> = ({squares}) => {
             break;
         }
     }
-    if(pieceMoved) {
+
+    if (capture) {
+        moveAudio.play();
+        captureAudio.play();
+    } else if (pieceAdded) {
+        addedPieceAudio.play();
+    } else if (pieceMoved) {
         moveAudio.play()
-    } else {
-        // powerUpAudio.play()
+    } else { //Board edited i.e powerup
+        powerUpAudio.play()
     }
     return  null;
 }
