@@ -33,7 +33,6 @@ const SoundMaker: React.FC<SoundMakerProps> = ({squares}) => {
     let pieceMoved = false; 
     for (let [i, square] of squares.entries()){
         if (square === null) continue;
-        console.log(i, square)
         if (prevSquares[i] === null) {
             pieceMoved = true;
             break;

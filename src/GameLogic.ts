@@ -117,7 +117,6 @@ export const validateMove = (
     to: number, 
     squares: (PieceData | null)[],
     ):boolean => {
-        console.log("from from", squares[from])
     if(squares[from] === null || squares[from] === undefined) return false;
     let moveStratData = moveStrategies.get(squares[from]!.type)
     moveStratData = expandRecurringMoves(from, moveStratData!, squares);

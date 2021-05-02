@@ -49,7 +49,6 @@ const Board: React.FC<BoardProps> = ({
 
     const editPowerUp = (id:number) => {
         if (selectedSquare?.powerUp?.type === PowerUpType.Clear) {
-            console.log(squares[id]?.powerUps)
             if(squares[id]?.powerUps.length !== 0) removePower(id)
         }
         else addPower(id, selectedSquare.powerUp!)
@@ -65,7 +64,6 @@ const Board: React.FC<BoardProps> = ({
                         makeMove(dropInfo.id!, id)
                         break
                     case DropInfoType.editSquare:
-                        console.log(decodePiece(dropInfo.letters!))
                         editSquare(id, decodePiece(dropInfo.letters!))
                         break
                     case DropInfoType.addPowerUp:
