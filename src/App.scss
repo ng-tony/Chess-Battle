@@ -1,0 +1,86 @@
+.App {
+  margin:auto;
+}
+
+.left {
+  width: 100%;
+  padding: 0.5em 1em;
+}
+
+.board {
+  margin: 0em 0em 1.5em 0em;
+}
+
+.button-bar {
+  width: 100%;
+}
+
+
+.tools {
+  flex-grow: 1;
+  .editors{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 1em 0;
+    .editor {
+      width: 80%;
+      margin: 0 0 2em 0;
+    }
+    .powerup-editor {
+      width: 55%;
+      margin: 0;
+    }
+  }
+}
+
+.history {
+  width: 100%;
+}
+
+@media (min-aspect-ratio: 6/5) {
+  .App{
+    height: 100vh;
+    .container{
+      flex-direction: row nowrap;
+    }
+  }
+  .board {
+    margin: 1em 0em 1.5em 0em;
+  }
+
+  .left {
+    flex-grow: 3;
+    width:auto;
+  }
+  .right {
+    flex-grow: 2;
+    display:flex;
+    flex-flow: column wrap;
+    > * {
+      flex-grow: 1;
+    }
+  }
+  .history {
+    width: 70%;
+  }
+}
+
+@media (min-width: 800px) {
+  .App {
+    width: 80vw;
+  }
+}
+
+.container {
+  position: relative;
+  display:flex;
+  height: auto;
+  flex-flow: row wrap;
+}
+
+.row{
+  display: flex;
+  width: 100%;
+}

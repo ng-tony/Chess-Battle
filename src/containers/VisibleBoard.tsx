@@ -1,10 +1,9 @@
 import { connect } from 'react-redux'
 import { movePiece, editSquare, addPower, removePowers, selectSquare } from '../actions'
 import Board from '../components/Board'
+import { SquareData } from '../components/BuildingBlocks/Square'
 import PieceData, {PowerUpData} from '../GameLogic'
 import { gameInfo } from '../reducers/gameInfo'
-
-
 
 const mapStateToProps = (state:{board: {
   past:PieceData[][]
@@ -24,12 +23,10 @@ const mapDispatchToProps = (dispatch:(action:any) => void)  => ({
   editSquare: (loc:number, piece:PieceData) => dispatch(editSquare(loc, piece)),
   addPower: (loc:number, powerUp: PowerUpData) => dispatch(addPower(loc, powerUp)),
   removePower:(loc:number) => dispatch(removePowers(loc)),
-  selectSquare:(loc:number) => dispatch(selectSquare(loc)),
+  selectSquare:(squareData:SquareData) => dispatch(selectSquare(squareData)),
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Board)
-
-connect()

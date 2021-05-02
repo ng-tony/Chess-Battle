@@ -3,14 +3,14 @@ import produce from 'immer'
 
 
 const defaultState = [
-    decodePiece('wr'), decodePiece('wn'), decodePiece('wb'), decodePiece('wq'), decodePiece('wk'), decodePiece('wb'), decodePiece('wn'), decodePiece('wr'),
+    decodePiece('wr'), decodePiece('wn'), decodePiece('wb'),  decodePiece('wk'), decodePiece('wq'), decodePiece('wb'), decodePiece('wn'), decodePiece('wr'),
     decodePiece('wp'), decodePiece('wp'), decodePiece('wp'), decodePiece('wp'), decodePiece('wp'), decodePiece('wp'), decodePiece('wp'), decodePiece('wp'),
     null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null,
     decodePiece('bp'), decodePiece('bp'), decodePiece('bp'), decodePiece('bp'), decodePiece('bp'), decodePiece('bp'), decodePiece('bp'), decodePiece('bp'),
-    decodePiece('br'), decodePiece('bn'), decodePiece('bb'), decodePiece('bq'), decodePiece('bk'), decodePiece('bb'), decodePiece('bn'), decodePiece('br'),
+    decodePiece('br'), decodePiece('bn'), decodePiece('bb'), decodePiece('bk'), decodePiece('bq'), decodePiece('bb'), decodePiece('bn'), decodePiece('br'),
     ]
 
 const boardReducer = (state = defaultState, action: any) => {
@@ -34,7 +34,7 @@ const boardReducer = (state = defaultState, action: any) => {
                 }
                 break;
             case 'REMOVE_POWERUPS':
-                if (draftState[action.loc]) {
+                if (draftState[action.loc] && draftState[action.loc]?.powerUps !== []) {
                     draftState[action.loc]!.powerUps = [];
                 }
                 break;

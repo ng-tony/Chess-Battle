@@ -1,3 +1,4 @@
+import { SquareData } from "../components/BuildingBlocks/Square"
 import PieceData, {PowerUpData} from "../GameLogic"
 
 
@@ -37,7 +38,7 @@ export const flipBoard = () => ({
 })
 
 
-export const selectSquare = (selectedSquare: number) => ({
+export const selectSquare = (selectedSquare: SquareData) => ({
     type: 'SELECT_SQUARE',
     selectedSquare,
 })
@@ -45,4 +46,8 @@ export const selectSquare = (selectedSquare: number) => ({
 
 export const toggleEditor = () => ({
     type: 'TOGGLE_EDITOR',
+})
+
+export const toggleAbout = () => ({
+    type: 'TOGGLE_ABOUT',
 })

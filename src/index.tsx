@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {createStore, compose} from 'redux';
@@ -18,7 +18,6 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(allReducer, composeEnhancers());
 
 ReactDOM.render(
-  
     <React.StrictMode>
       <Provider store={store}>
         <App />

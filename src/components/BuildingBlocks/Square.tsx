@@ -1,4 +1,5 @@
-import PieceData, { PowerUpData } from '../GameLogic'
+import "./Square.scss"
+import PieceData, { PowerUpData } from '../../GameLogic'
 import React from 'react'
 import Piece from './Piece'
 import PowerUp from './PowerUp'
@@ -9,23 +10,23 @@ export interface SquareData  {
     id?: number
     piece?: PieceData | null,
     powerUp?: PowerUpData,
-    onDrop?: (ev: React.DragEvent) => void
-    onClick?: (ev: React.MouseEvent) => void
     highlighted: boolean,
     lastMove: boolean,
     selected: boolean,
 }
 
 //prettier-ignore
-const Square = ({ squareData }: 
+const Square = ({ squareData, onDrop, onClick }: 
     {
-     onDrop?: (ev: React.DragEvent) => void;
-     squareData: (SquareData) }) => {
+    squareData: (SquareData),
+    onDrop?: (ev: React.DragEvent) => void,
+    onClick?: (ev: React.MouseEvent) => void,
+    }) => {
 
-    const {id, piece, powerUp, onDrop, onClick, highlighted, lastMove, selected} = squareData;
+    const {id, piece, powerUp, highlighted, lastMove, selected} = squareData;
 
     return (
-    <div className={"square" + (highlighted || selected ? " highlighted" : (lastMove ? " lastMove" : ""))} 
+    <div className={"square" + (highlighted || (selected && (piece || powerUp)) ? " highlighted" : (lastMove ? " lastMove" : ""))} 
         onDragOver={onDrop ? (ev) => ev.preventDefault() : undefined}
         onDrop={onDrop}
         onMouseDown={onClick}

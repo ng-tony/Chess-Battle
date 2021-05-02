@@ -1,13 +1,16 @@
-import {pieceImages, PieceImageKey, powerUpImages, PowerUpImageKey} from '../assets/img/index'
-import PieceData from '../GameLogic'
-import { DropInfo, DropInfoType } from './Board'
+import './Piece.scss'
+import {pieceImages, PieceImageKey, powerUpImages, PowerUpImageKey} from '../../assets/img/index'
+import PieceData from '../../GameLogic'
+import { DropInfo, DropInfoType } from '../Board'
 import React from 'react';
 
-const VisualPiece = ({piece, selected, pId}: {
+type PieceProps = {
     piece:PieceData,
     selected: boolean,
     pId?:number
-}) => {
+}
+
+const VisualPiece: React.FC<PieceProps> = ({piece, selected, pId}) => {
     const pieceDrag = (ev:React.DragEvent) => {
         let dropInfo: DropInfo;
         if (pId as number >= 0) {
