@@ -23,6 +23,7 @@ const Editor:React.FC<EditorProps> =  ({selectedSquare, editSquare, selectSquare
     
     const onDropHandlerFactory = () => {
         return (ev: React.DragEvent) => {
+            ev.preventDefault();
             let dropInfo = JSON.parse(ev.dataTransfer.getData('dropInfo')) as DropInfo;
             if (dropInfo.id) editSquare(dropInfo.id, decodePiece("bz")) //remove piece
         }
@@ -46,7 +47,7 @@ const Editor:React.FC<EditorProps> =  ({selectedSquare, editSquare, selectSquare
                         piece,
                         highlighted: false,
                         lastMove: false,
-                        selected: isEqual(selectedSquare.piece, piece),
+                        selected: isEqual(selectedSquare.piece, piece) && selectedSquare.id === undefined,
                     }
                     return <Square
                                 key={i}
@@ -62,7 +63,7 @@ const Editor:React.FC<EditorProps> =  ({selectedSquare, editSquare, selectSquare
                         piece,
                         highlighted: false,
                         lastMove: false,
-                        selected: isEqual(selectedSquare.piece, piece),
+                        selected: isEqual(selectedSquare.piece, piece) && selectedSquare.id === undefined,
                     }
                     return <Square
                                 key={i}

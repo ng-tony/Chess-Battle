@@ -46,11 +46,20 @@ const Board: React.FC<BoardProps> = ({
         }
         return false
     }
+
+    const editPowerUp = (id:number) => {
+        if (selectedSquare?.powerUp?.type === PowerUpType.Clear) {
+            console.log(squares[id]?.powerUps)
+            if(squares[id]?.powerUps.length !== 0) removePower(id)
+        }
+        else addPower(id, selectedSquare.powerUp!)
+    }
+
     const onDropHandlerFactory = ({ id }: SquareData) => {
         return (ev: React.DragEvent) => {
             ev.preventDefault()
             let dropInfo = JSON.parse(ev.dataTransfer.getData('dropInfo')) as DropInfo
-            if (id) {
+            if (id !== undefined) {
                 switch (dropInfo.type) {
                     case DropInfoType.move:
                         makeMove(dropInfo.id!, id)
@@ -61,8 +70,7 @@ const Board: React.FC<BoardProps> = ({
                         break
                     case DropInfoType.addPowerUp:
                         if (dropInfo.powerUp)
-                            if (dropInfo.powerUp.type === PowerUpType.Clear) removePower(id)
-                            else addPower(id, dropInfo.powerUp)
+                            editPowerUp(id)
                         break
                 }
             } else { //Dropped onto the editors
@@ -76,8 +84,8 @@ const Board: React.FC<BoardProps> = ({
         return (ev: React.MouseEvent) => {
             const { id } = squareData;
             let clearSelected = false;
-            if (id) {
-                if (selectedSquare?.id && selectedSquare.id > 0) {
+            if (id !== undefined) {
+                if (selectedSquare?.id !== undefined && selectedSquare.id >= 0) {
                     if (makeMove(selectedSquare.id, id)) {
                         clearSelected = true;
                     }
@@ -87,7 +95,7 @@ const Board: React.FC<BoardProps> = ({
                         clearSelected = true;
                     }
                     if (selectedSquare.powerUp) {
-                        addPower(id, selectedSquare.powerUp!)
+                        editPowerUp(id)
                         clearSelected = true;
                     }
                 }
@@ -128,14 +136,30 @@ const Board: React.FC<BoardProps> = ({
                         )
                     })}
                 <div className="ruler file">
-                    <div className="rule">h</div>
-                    <div className="rule">g</div>
-                    <div className="rule">f</div>
-                    <div className="rule">e</div>
-                    <div className="rule">d</div>
-                    <div className="rule">c</div>
-                    <div className="rule">b</div>
-                    <div className="rule">a</div>
+                    <div className="rule">
+                        <p>h</p>
+                    </div>
+                    <div className="rule">
+                        <p>g</p>
+                    </div>
+                    <div className="rule">
+                        <p>f</p>
+                    </div>
+                    <div className="rule">
+                        <p>e</p>
+                    </div>
+                    <div className="rule">
+                        <p>d</p>
+                    </div>
+                    <div className="rule">
+                        <p>c</p>
+                    </div>
+                    <div className="rule">
+                        <p>b</p>
+                    </div>
+                    <div className="rule">
+                        <p>a</p>
+                    </div>
                 </div>
                 <div className="ruler rank">
                     <div className="rule">

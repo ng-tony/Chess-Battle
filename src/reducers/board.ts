@@ -34,7 +34,7 @@ const boardReducer = (state = defaultState, action: any) => {
                 }
                 break;
             case 'REMOVE_POWERUPS':
-                if (draftState[action.loc]) {
+                if (draftState[action.loc] && draftState[action.loc]?.powerUps !== []) {
                     draftState[action.loc]!.powerUps = [];
                 }
                 break;

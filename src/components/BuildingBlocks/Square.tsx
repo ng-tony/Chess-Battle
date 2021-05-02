@@ -26,7 +26,7 @@ const Square = ({ squareData, onDrop, onClick }:
     const {id, piece, powerUp, highlighted, lastMove, selected} = squareData;
 
     return (
-    <div className={"square" + (highlighted || (selected && piece) ? " highlighted" : (lastMove ? " lastMove" : ""))} 
+    <div className={"square" + (highlighted || (selected && (piece || powerUp)) ? " highlighted" : (lastMove ? " lastMove" : ""))} 
         onDragOver={onDrop ? (ev) => ev.preventDefault() : undefined}
         onDrop={onDrop}
         onMouseDown={onClick}
