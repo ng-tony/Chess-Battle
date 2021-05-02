@@ -43,4 +43,4 @@ Fluff:
 The art of programming:
     Refactor GameLogic for better code reuse, and also shift things around
         probably needs to be in more than one file too
-    
+    Board drop and square can be dried

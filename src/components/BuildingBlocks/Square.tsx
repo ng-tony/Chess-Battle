@@ -10,20 +10,20 @@ export interface SquareData  {
     id?: number
     piece?: PieceData | null,
     powerUp?: PowerUpData,
-    onDrop?: (ev: React.DragEvent) => void
-    onClick?: (ev: React.MouseEvent) => void
     highlighted: boolean,
     lastMove: boolean,
     selected: boolean,
 }
 
 //prettier-ignore
-const Square = ({ squareData }: 
+const Square = ({ squareData, onDrop, onClick }: 
     {
-     onDrop?: (ev: React.DragEvent) => void;
-     squareData: (SquareData) }) => {
+    squareData: (SquareData),
+    onDrop?: (ev: React.DragEvent) => void,
+    onClick?: (ev: React.MouseEvent) => void,
+    }) => {
 
-    const {id, piece, powerUp, onDrop, onClick, highlighted, lastMove, selected} = squareData;
+    const {id, piece, powerUp, highlighted, lastMove, selected} = squareData;
 
     return (
     <div className={"square" + (highlighted || (selected && piece) ? " highlighted" : (lastMove ? " lastMove" : ""))} 
