@@ -21,6 +21,8 @@ body {
   --dark-ruler-color: rgb(68, 66, 60);
   --board-size: 60%;
   --light-text-color: rgb(200, 200, 200);
+  --dark-background-color: rgb(42, 42, 42);
+  --button-hover-color: rgb(110, 110, 110);
 }
 
 
@@ -37,3 +39,22 @@ h2 {
 p {
   font-family: 'Open Sans', sans-serif;
 }
+
+.btn {
+  background-color: rgb(54, 54, 54);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+  flex-grow:1;
+  margin: 0em 0.2em;
+  border-radius: 0em;
+  border: transparent;
+  text-align: center;
+  color: var(--light-text-color)
+}
+
+.btn:hover{
+  background-color:var(--button-hover-color);
+}
+

@@ -6,13 +6,11 @@ import PieceData, {PowerUpData} from '../GameLogic'
 import { gameInfo } from '../reducers/gameInfo'
 
 const mapStateToProps = (state:{board: {
-  past:PieceData[][]
-  present:PieceData[]
-  future:PieceData[][]
+  present: {squares: (PieceData | null)[]}
 }, gameInfo: gameInfo
 }) => {
   return {
-    squares: state.board.present,
+    squares: state.board.present.squares,
     selectedSquare: state.gameInfo.selectedSquare,
     lastMove: state.gameInfo.lastMove,
   }

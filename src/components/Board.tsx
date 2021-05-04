@@ -1,7 +1,7 @@
 import './Board.scss'
 import React from 'react'
 import PieceData, { decodePiece, getMoves, PowerUpData } from '../GameLogic'
-import Square, { SquareData } from './BuildingBlocks/Square'
+import Square, { NULL_SQUARE, SquareData } from './BuildingBlocks/Square'
 
 import { validateMove, PowerUpType } from '../GameLogic'
 
@@ -61,14 +61,18 @@ const Board: React.FC<BoardProps> = ({
             if (id !== undefined) {
                 switch (dropInfo.type) {
                     case DropInfoType.move:
-                        makeMove(dropInfo.id!, id)
+                        makeMove(dropInfo.id!, id);
+                        selectSquare(NULL_SQUARE);
                         break
                     case DropInfoType.editSquare:
-                        editSquare(id, decodePiece(dropInfo.letters!))
+                        editSquare(id, decodePiece(dropInfo.letters!));
+                        selectSquare(NULL_SQUARE);
                         break
                     case DropInfoType.addPowerUp:
-                        if (dropInfo.powerUp)
-                            editPowerUp(id)
+                        if (dropInfo.powerUp){
+                            editPowerUp(id);
+                            selectSquare(NULL_SQUARE);
+                        }
                         break
                 }
             } else { //Dropped onto the editors
@@ -103,7 +107,6 @@ const Board: React.FC<BoardProps> = ({
     }
 
     const squaresToBeHighlighted = selectedSquare.id ? getMoves(selectedSquare.id, squares) : []
-
     return (
         <div className="board">
             <div className="container">

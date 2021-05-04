@@ -1,9 +1,6 @@
 Bugs:
-    Clear select when undo/redo
 
 Next Thing:
-    Click to move for editor
-    Add sounds to undo redo
 
 Currently Unimplemented:
     Piece promotions
@@ -11,8 +8,6 @@ Currently Unimplemented:
 Features:
     Mobile Support
         Drag and drop dont work
-    History Ui
-        -
     Top bar..?
     
 
