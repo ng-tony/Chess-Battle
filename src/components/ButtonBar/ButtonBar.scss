@@ -12,21 +12,7 @@
     height: 2em;
 }
 
-.btn {
-    background-color: rgb(54, 54, 54);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s;
-    flex-grow:1;
-    margin: 0em 0.2em;
-    border-radius: 5%;
-    border: transparent;
-}
 
-.btn:hover{
-    background-color:rgb(110, 110, 110);
-}
 
 .about {
     flex-grow: 2;
@@ -84,7 +70,7 @@
 .modal {
     display: block;
     position: fixed;
-    z-index: 1;
+    z-index: 10;
     left: 0;
     top: 0;
     width: 100%;
@@ -108,7 +94,7 @@
 }
 
 .modal-header {
-    background-color: rgb(42, 42, 42);
+    background-color: var(--dark-background-color);
     color: rgb(230, 230, 230);
     text-align: center;
     padding: 0.5em;

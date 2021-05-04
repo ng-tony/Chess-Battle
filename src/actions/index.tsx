@@ -51,3 +51,9 @@ export const toggleEditor = () => ({
 export const toggleAbout = () => ({
     type: 'TOGGLE_ABOUT',
 })
+
+
+export const jumpToHistory = (step: number) => ({
+    type: 'JUMP',
+    step: step,
+})

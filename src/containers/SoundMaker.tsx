@@ -53,7 +53,7 @@ const SoundMaker: React.FC<SoundMakerProps> = ({squares}) => {
 }
 
 const mapState = ((state: { board: { present: any; }; }) => {
-    return {squares: state.board.present}
+    return {squares: state.board.present.squares}
 })
 
 export default connect (mapState)(SoundMaker);

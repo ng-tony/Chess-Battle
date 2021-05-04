@@ -1,8 +1,10 @@
-const undoable = (reducer: any) => {
+import { decodeActionForDisplay } from "./board"
+
+const history = (reducer: any) => {
     // Call the reducer with empty action to populate the initial state
     const initialState = {
         past: [],
-        present: reducer(undefined, {}),
+        present: {move: "", squares:reducer(undefined, {})},
         future: [],
     }
 
@@ -32,10 +34,37 @@ const undoable = (reducer: any) => {
                     }
                 }
                 break;
+            case 'JUMP':
+                const step = action.step;
+                if (step === past.length) { return state }
+                if (step < past.length) {
+                    const newPast = past.slice(0, step);
+                    const newPresent = past[step];
+                    const newFuture = [...past.slice(step+1), present, ...future];
+                    return {
+                        past: newPast,
+                        present: newPresent,
+                        future: newFuture
+                    }
+                } else {
+                    const fIndex = step - past.length -1;
+                    const newPast =[...past, present, ...future.slice(0, fIndex)];
+                    const newPresent = future[fIndex]
+                    const newFuture = future.slice(fIndex + 1)
+                    return {
+                        past: newPast,
+                        present: newPresent,
+                        future: newFuture
+                    }
+                }
             default:
                 // Delegate handling the action to the passed reducer
-                const newPresent = reducer(present, action)
-                if (present === newPresent) {
+                const newPresent = {
+                    move:decodeActionForDisplay(present.squares, action),
+                    squares: reducer(present.squares, action)
+                }
+            
+                if (present.squares === newPresent.squares) {
                     return state
                 }
                 return {
@@ -48,4 +77,4 @@ const undoable = (reducer: any) => {
     }
 }
 
-export default undoable
+export default history

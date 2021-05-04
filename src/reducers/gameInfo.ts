@@ -1,5 +1,5 @@
 import produce from 'immer'
-import { SquareData } from '../components/BuildingBlocks/Square';
+import { NULL_SQUARE, SquareData } from '../components/BuildingBlocks/Square';
 
 export interface gameInfo {
     selectedSquare: SquareData,
@@ -9,8 +9,9 @@ export interface gameInfo {
     about: boolean,
 }
 
+
 const defaultState = {
-    selectedSquare: {id:-1, highlighted:false, selected:false, lastMove:false} as SquareData,
+    selectedSquare: NULL_SQUARE,
     flippedBoard: false,
     hideEditor: false,
     squaresSelected: [],

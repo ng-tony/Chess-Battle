@@ -68,6 +68,29 @@ const decodePieceType = (letters: string): PieceType => {
     }
 }
 
+export const indexToCoord = (n: number) => String.fromCharCode(104 -  n % 8) + (Math.floor(n/8) + 1);
+export const pieceToLetter = (p : PieceData | null) => {
+    if (p === null) return "";
+    switch (p.type) {
+        case PieceType.Bishop: 
+            return "b";
+        case PieceType.Blank:
+            return "";
+        case PieceType.King:
+            return "k";
+        case PieceType.Knight:
+            return "n"
+        case PieceType.Pawn:
+            return ""
+        case PieceType.Queen:
+            return "q"
+        case PieceType.Rook:
+            return "r"
+        default:
+            return ""
+    }
+}
+
 interface PieceMove {
     addend: number,
     rowChange: number,

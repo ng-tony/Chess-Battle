@@ -5,6 +5,7 @@ import Piece from './Piece'
 import PowerUp from './PowerUp'
 
 
+export const NULL_SQUARE = {id:-1, highlighted:false, selected:false, lastMove:false} as SquareData;
 
 export interface SquareData  {
     id?: number
