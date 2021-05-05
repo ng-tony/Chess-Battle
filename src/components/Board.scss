@@ -1,3 +1,17 @@
+.container.flipped {
+    flex-direction: column-reverse;
+}
+
+.row.flipped {
+    flex-direction: row-reverse;
+}
+.file.flipped {
+    flex-direction: row-reverse;
+}
+.rank.flipped{
+    flex-direction: column-reverse;
+}
+
 .rule {
     flex-grow: 1;
     text-align: center;
@@ -7,6 +21,8 @@
 }
 
 .file {
+    position: absolute;
+    top:100%;
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
