@@ -2,13 +2,10 @@
   "name": "chess-battle",
   "version": "0.1.0",
   "description": "[https://chess.ng-tony.ca/](https://chess.ng-tony.ca/)",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "client": "cd client && yarn start",
-    "server": "cd server && yarn start",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "s": "node server/dist/index.js"
+    "start": "tsc && nodemon dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +18,10 @@
   },
   "homepage": "https://github.com/ng-tony/chess-battle#readme",
   "dependencies": {
-    "concurrently": "^6.0.2"
+    "@types/express": "^4.17.11",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.4"
   }
 }

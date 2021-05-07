@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { jumpToHistory, selectSquare } from '../actions';
 import { NULL_SQUARE } from './BuildingBlocks/Square';
 import './History.scss'
+import React from 'react';
 
 type HistoryItem = {move: string};
 type HistoryProps = {
@@ -28,7 +29,6 @@ const History:React.FC<HistoryProps> = ({state:{past, present, future}, jumpToHi
     })
     const historyContents = []
     for (let i = 1; i < fullHistoryJSX.length; i=i+2) {
-        console.log(current, i)
         historyContents.push(
             <div className="row">
                 <div className="row-item move-number"><p>{((i-1)/2) + 1}</p></div>

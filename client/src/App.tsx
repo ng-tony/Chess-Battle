@@ -1,4 +1,5 @@
 import './App.scss'
+import React, { useEffect, useRef } from 'react'
 import VisibleBoard from './containers/VisibleBoard'
 import Editor from './components/Editor'
 import PowerUpEditor from './components/PowerUpEditor'
@@ -7,7 +8,13 @@ import ButtonBar from './components/ButtonBar'
 import History from './components/History'
 import SoundMaker from './containers/SoundMaker'
 
+
 function App() {
+    useEffect( () => {
+        fetch("/api")
+            .then((res) => res.json())
+            .then((data) => {console.log(data.message)})
+    })
     return (
         <div className="App">
             <div className="container">
