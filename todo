@@ -1,27 +1,20 @@
 Bugs:
 
 Next Thing:
-    Board Flip
-    Mobile Touch api
+    
 Currently Unimplemented:
     Piece promotions
 
 Features:
     Mobile Support
         Drag and drop dont work
+        //Skipped for now
     Top bar..?
     
 
 Smaller features:
-    Letters/numbers for coordinate on board
-    Drag into editor is delete
     X icon for deleting a piece/powerup instead of a blank
     Hide editors
-    Sounds
-        onCapture
-        onCheck
-        onPoweredup
-    Flip board
     Piece snapping
     Piece becomes translucent when it got picked up
 

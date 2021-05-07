@@ -13,6 +13,7 @@ type PieceProps = {
 const VisualPiece: React.FC<PieceProps> = ({piece, selected, pId}) => {
     const pieceDrag = (ev:React.DragEvent) => {
         let dropInfo: DropInfo;
+        
         if (pId as number >= 0) {
             dropInfo = {
                 type: DropInfoType.move,
@@ -26,13 +27,13 @@ const VisualPiece: React.FC<PieceProps> = ({piece, selected, pId}) => {
         }
         ev?.dataTransfer?.setData("dropInfo", JSON.stringify(dropInfo));
     }
-
+    
     const layeredImages = piece.powerUps.reduce((acc, pup) => {
         return acc + "url(" + powerUpImages[pup.type as PowerUpImageKey] + "),"
     }, "") + "url(" + pieceImages[piece.letters as PieceImageKey] + ")"
 
     return (
-            <div className="piece"
+            <div className= {"piece"}
                 draggable={piece ? true: false}
                 onDragStart={piece ? pieceDrag : () => false}
                 id={pId !== undefined ? pId.toString() : "null"}

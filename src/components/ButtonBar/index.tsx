@@ -1,9 +1,7 @@
 
 import { connect } from 'react-redux';
 import { flipBoard, redo, toggleAbout, undo } from '../../actions';
-import About from './About'
 import './ButtonBar.scss'
-import Redo from './Redo';
 import Butt from './Butt';
 import AboutModal from './AboutModal'
 
