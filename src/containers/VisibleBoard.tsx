@@ -13,6 +13,7 @@ const mapStateToProps = (state:{board: {
     squares: state.board.present.squares,
     selectedSquare: state.gameInfo.selectedSquare,
     lastMove: state.gameInfo.lastMove,
+    flipped: state.gameInfo.flippedBoard,
   }
 }
 

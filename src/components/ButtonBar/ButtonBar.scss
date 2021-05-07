@@ -14,22 +14,29 @@
 
 
 
-.about {
-    flex-grow: 2;
+.btn.about {
+    flex-grow: 1;
     .btn-img {
         background-image: url("/assets/img/question.svg");
     }
 }
 
+.btn.flip {
+    flex-grow: 1;
+    .btn-img {
+        background-image: url("/assets/img/flip.svg");
+    }
+}
 
-.undo {
+
+.btn.undo {
     flex-grow: 5;
     .btn-img {
         background-image: url("/assets/img/undo.svg");
     }
 }
 
-.redo {
+.btn.redo {
     flex-grow: 5;
     .btn-img {
         background-image: url("/assets/img/undo.svg");

@@ -54,7 +54,7 @@ p {
   color: var(--light-text-color)
 }
 
-.btn:hover{
+.btn:hover, .btn:focus, .btn:active{
   background-color:var(--button-hover-color);
 }
 

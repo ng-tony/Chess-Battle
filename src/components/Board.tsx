@@ -22,6 +22,7 @@ export type BoardProps = {
     squares: (PieceData | null)[]
     selectedSquare: SquareData,
     lastMove: { from: number; to: number }
+    flipped: boolean;
     movePiece: (from: number, to: number) => void
     editSquare: (loc: number, piece: PieceData) => void
     addPower: (loc: number, powerUp: PowerUpData) => void
@@ -33,6 +34,7 @@ const Board: React.FC<BoardProps> = ({
     squares,
     selectedSquare,
     lastMove,
+    flipped,
     movePiece,
     editSquare,
     addPower,
@@ -109,12 +111,12 @@ const Board: React.FC<BoardProps> = ({
     const squaresToBeHighlighted = selectedSquare.id ? getMoves(selectedSquare.id, squares) : []
     return (
         <div className="board">
-            <div className="container">
+            <div className={"container" + (flipped ? " flipped" : "")}>
                 {Array(8)
                     .fill(null)
                     .map((_, i) => {
                         return (
-                            <div className="row" key={i}>
+                            <div className={"row" + (flipped ? " flipped" : "")} key={i}>
                                 {squares.slice(i * 8, i * 8 + 8).map((square, j) => {
                                     const id = i * 8 + j
                                     let squareData: SquareData = {
@@ -136,7 +138,7 @@ const Board: React.FC<BoardProps> = ({
                             </div>
                         )
                     })}
-                <div className="ruler file">
+                <div className={"ruler file" + (flipped ? " flipped" : "")}>
                     <div className="rule">
                         <p>h</p>
                     </div>
@@ -162,7 +164,7 @@ const Board: React.FC<BoardProps> = ({
                         <p>a</p>
                     </div>
                 </div>
-                <div className="ruler rank">
+                <div className={"ruler rank" + (flipped ? " flipped" : "")}>
                     <div className="rule">
                         <p>1</p>
                     </div>
