@@ -38,16 +38,15 @@ const SoundMaker: React.FC<SoundMakerProps> = ({squares}) => {
             break;
         }
     }
-
     if (capture) {
-        moveAudio.play();
-        captureAudio.play();
+        moveAudio.play().catch(error => {/*meh*/});
+        captureAudio.play().catch(error => {/*meh*/});;
     } else if (pieceAdded) {
-        addedPieceAudio.play();
+        addedPieceAudio.play().catch(error => {/*meh*/});
     } else if (pieceMoved) {
-        moveAudio.play()
+        moveAudio.play().catch(error => {/*meh*/});
     } else { //Board edited i.e powerup
-        powerUpAudio.play()
+        powerUpAudio.play().catch(error => {/*meh*/});
     }
     return  null;
 }

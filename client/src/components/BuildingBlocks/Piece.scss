@@ -1,6 +1,7 @@
 .piece {
     background-size: cover;
     background-repeat: no-repeat;
+    backdrop-filter: opacity(0%); //Stupid chrome
     padding-bottom: 100%;
 }
   

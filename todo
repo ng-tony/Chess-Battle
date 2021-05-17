@@ -1,7 +1,10 @@
 Bugs:
 
 Next Thing:
-    
+    Refine multiplayer...
+        Security?
+        Clear rooms?
+        
 Currently Unimplemented:
     Piece promotions
 
@@ -19,10 +22,7 @@ Smaller features:
     Piece becomes translucent when it got picked up
 
 Longer term goals:
-    Multiplayer
-        url roomcode
-        player --websocket?--> server --websocket?--> other player
-        taking turns? or sandbox with like infinite joiners
+
 
 Fluff:
     Timer?
@@ -33,3 +33,6 @@ The art of programming:
     Refactor GameLogic for better code reuse, and also shift things around
         probably needs to be in more than one file too
     Board drop and square can be dried
+
+
+Make room code all UPPER

@@ -46,7 +46,7 @@
         border-radius: 1em 0 0 0;
     }
     .row-item:last-of-type {
-        border-radius: 0 1em 0 0;
+        border-radius: inherit 1em inherit inherit;
     }
 }
 
