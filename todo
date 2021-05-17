@@ -1,0 +1,38 @@
+Bugs:
+
+Next Thing:
+    Refine multiplayer...
+        Security?
+        Clear rooms?
+        
+Currently Unimplemented:
+    Piece promotions
+
+Features:
+    Mobile Support
+        Drag and drop dont work
+        //Skipped for now
+    Top bar..?
+    
+
+Smaller features:
+    X icon for deleting a piece/powerup instead of a blank
+    Hide editors
+    Piece snapping
+    Piece becomes translucent when it got picked up
+
+Longer term goals:
+
+
+Fluff:
+    Timer?
+    What should be guard priorities? Weakest piece? Knight before bishop?
+    Feature Request? // bug report?
+
+The art of programming:
+    Refactor GameLogic for better code reuse, and also shift things around
+        probably needs to be in more than one file too
+    Board drop and square can be dried
+
+
+Make room code all UPPER
