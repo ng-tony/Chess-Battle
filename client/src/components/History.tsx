@@ -23,33 +23,31 @@ const History:React.FC<HistoryProps> = ({state:{past, present, future}, jumpToHi
     }
     const fullHistory = past.concat([present]).concat(future);
     const fullHistoryJSX = fullHistory.map((historyItem, i) => {
-        return <div className="row-item btn unselectable">
-                    <p>{historyItem.move}</p>
-                </div>
+        return <p>{historyItem.move}</p>
+                
     })
     const historyContents = []
     for (let i = 1; i < fullHistoryJSX.length; i=i+2) {
         historyContents.push(
-            <div className="row">
+            <div className="row" key={i}>
                 <div className="row-item move-number"><p>{((i-1)/2) + 1}</p></div>
                 <div 
                     className={"row-item btn unselectable" + ((current===i) ? " selected" : "")}
                     onClick = {makeOnClickHandler(i)}
                 >
-                    <p>{fullHistoryJSX[i]}</p>
+                   {fullHistoryJSX[i]}
                 </div>
                 { fullHistoryJSX.length > i+1 ?
                 <div
                     className={"row-item btn unselectable" + ((current===i+1) ? " selected" : "")}
                     onClick = {makeOnClickHandler(i+1)}
                 >
-                    <p>{fullHistoryJSX[i+1]}</p>
+                    {fullHistoryJSX[i+1]}
                 </div> : <div className="row-item"></div>
                 }
             </div>
         )
     }
-    console.log(fullHistory)
     return (
         <div className="history">
             {historyContents}

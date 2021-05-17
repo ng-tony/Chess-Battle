@@ -1,4 +1,10 @@
+import { ServerMessage, ws } from "../App"
 import { decodeActionForDisplay } from "./board"
+
+// type historyItem = {
+//     moveNumber: number,
+//     action: AnyAction,
+// }
 
 const history = (reducer: any) => {
     // Call the reducer with empty action to populate the initial state
@@ -6,11 +12,12 @@ const history = (reducer: any) => {
         past: [],
         present: {move: "", squares:reducer(undefined, {})},
         future: [],
+       // history: [] as historyItem[],
     }
 
     // Return a reducer that handles undo and redo
     return function (state = initialState, action: any) {
-        const { past, present, future } = state
+        const { past, present, future, /*history*/ } = state
         switch (action.type) {
             case 'UNDO':
                 if (past.length > 0){
@@ -67,10 +74,15 @@ const history = (reducer: any) => {
                 if (present.squares === newPresent.squares) {
                     return state
                 }
+                if((!action.localOnly) && ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({type: "move", action: action, jump: past.length} as ServerMessage))
+                }
+
                 return {
                     past: [...past, present],
                     present: newPresent,
                     future: [],
+                    //history: history,
                 }
         }
         return state;

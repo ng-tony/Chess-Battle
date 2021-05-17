@@ -4,9 +4,13 @@
 
 Basically chess with powerups.
 
+Currently only the client is hosted. I.e Backend is not hosted, so no online games yet.
+
 ## Run
 
-Start with `yarn start`
+Start with `yarn dev`
+
+or `yarn server` and `yarn client`
 
 ## Powerups
 
@@ -24,3 +28,9 @@ Regular rules + add one powerup at the end of the turn?
 Powerup takes a move?
 
 Should you be able to stack powerups? Take powerups from your opponents?
+
+## Multiplayer
+
+_As noted, multiplayer is currently not hosted._
+
+Rooms are joined through the url query _game_ ex. `http://localhost:3000/?game=test`

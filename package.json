@@ -2,13 +2,11 @@
   "name": "chess-battle",
   "version": "0.1.0",
   "description": "[https://chess.ng-tony.ca/](https://chess.ng-tony.ca/)",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "cd client && yarn start",
     "server": "cd server && yarn start",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "s": "node server/dist/index.js"
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "repository": {
     "type": "git",

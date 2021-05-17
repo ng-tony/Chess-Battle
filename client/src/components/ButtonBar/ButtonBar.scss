@@ -44,33 +44,9 @@
     }
 }
 
-.btn-img{
-    width:1.5em;
-    height: 1.5em;
-    background-size: cover;
-    opacity: 65%;
-    filter: invert(100%)  brightness(95%);
-}
-
-@media (min-aspect-ratio: 6/5) {
+@media (min-width: 800px), (min-aspect-ratio: 6/5) {
     .button-bar {
         height: 4em;
-    }
-
-    .btn {
-        background-color: transparent;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: all 0.2s;
-        flex-grow:1;
-        margin: 0em 0.2em;
-        border-radius: 5%;
-    }
-
-    .btn-img{
-        width: 2.5em;
-        height: 2.5em;
     }
 }
 
@@ -116,7 +92,7 @@
 }
 
 .show{
-    opacity: 1;
+    opacity: 100%;
 }
 
 .hide{
